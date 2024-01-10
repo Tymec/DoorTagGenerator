@@ -2,6 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:Avalonia.Themes.Neumorphism.Controls;assembly=Avalonia.Themes.Neumorphism"
+        xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="App.MainWindow"
         Title="App">
@@ -9,7 +11,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*" />
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -19,7 +21,7 @@
             Grid.Row="0"
             Background="LightGray"
             Margin="10"
-            CornerRadius="5"
+            CornerRadius="15"
         >
             <StackPanel 
                 Orientation="Vertical"
@@ -34,29 +36,50 @@
             Grid.Row="0"
             Background="LightGray"
             Margin="10"
-            CornerRadius="5"
+            CornerRadius="15"
         >
             <StackPanel
                 Orientation="Vertical"
                 Margin="10"
-                Spacing="10"
             >
-                <TextBlock Text="Inputs" />
                 <!-- Inputs: Room number, Room members, Logo URL -->
-                <DockPanel>
-                    <TextBox Watermark="Enter room number" />
-                </DockPanel>
-                <DockPanel>
-                    <TextBox Watermark="Enter room members" />
-                </DockPanel>
-                <DockPanel>
-                    <TextBox Watermark="Enter logo URL" />
-                </DockPanel>
+                <TextBox 
+                  UseFloatingWatermark="False"
+                  Watermark="Enter room number"
+                  ToolTip.Tip="Room number"
+                />
+                <TextBox
+                  Watermark="Enter logo URL"
+                />
+                <TextBox
+                  AcceptsReturn="True"
+                  Height="150"
+                  MaxHeight="150"
+                  TextWrapping="Wrap"
+                  ToolTip.Tip="Room members"
+                  Watermark="Enter room members"
+                  UseFloatingWatermark="True"
+                />
+                
                 <!-- Buttons: Save, Load, Print -->
                 <UniformGrid Rows="1">
-                    <Button Grid.Column="0" HorizontalAlignment="Left" Content="Save" />
-                    <Button Grid.Column="1" HorizontalAlignment="Center" Content="Load" />
-                    <Button Grid.Column="2" HorizontalAlignment="Right" Content="Print" />
+                    <controls:FloatingButton HorizontalAlignment="Left" Grid.Column="0" ToolTip.Tip="Save">
+                      <controls:FloatingButton.Content>
+                        <icons:MaterialIcon Kind="FloppyDisc" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
+                      </controls:FloatingButton.Content>
+                    </controls:FloatingButton>
+
+                    <controls:FloatingButton HorizontalAlignment="Center" Grid.Column="1" ToolTip.Tip="Load">
+                      <controls:FloatingButton.Content>
+                        <icons:MaterialIcon Kind="Download" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
+                      </controls:FloatingButton.Content>
+                    </controls:FloatingButton>
+
+                    <controls:FloatingButton HorizontalAlignment="Right" Grid.Column="2" ToolTip.Tip="Print">
+                      <controls:FloatingButton.Content>
+                        <icons:MaterialIcon Kind="Printer" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
+                      </controls:FloatingButton.Content>
+                    </controls:FloatingButton>
                 </UniformGrid>
             </StackPanel>
         </Border>
