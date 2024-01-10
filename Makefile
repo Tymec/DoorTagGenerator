@@ -22,6 +22,10 @@ windows:
 	@mv build/win-x64/App.exe build/App.exe
 	@rm -rf build/win-x64
 
-build: linux windows
+publish: linux windows
 
-.PHONY: clean linux windows build
+dev:
+	@echo "Building"
+	@dotnet run --project App -r win-x64
+
+.PHONY: clean linux windows publish dev

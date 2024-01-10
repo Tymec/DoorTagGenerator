@@ -3,6 +3,9 @@
     "[csharp]": {
         "editor.defaultFormatter": "ms-dotnettools.csharp"
     },
+    "[AXAML]": {
+        "editor.defaultFormatter": "AvaloniaTeam.vscode-avalonia"
+    },
     "editor.formatOnSave": true,
     "files.exclude": {
         "**/.git": true,
@@ -21,6 +24,10 @@
         },
         {
             "extensionId": "ms-dotnettools.csdevkit",
+            "path": "/usr/bin/dotnet"
+        },
+        {
+            "extensionId": "AvaloniaTeam.vscode-avalonia",
             "path": "/usr/bin/dotnet"
         }
     ]
