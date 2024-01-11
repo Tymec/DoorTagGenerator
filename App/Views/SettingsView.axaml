@@ -13,12 +13,12 @@
     <StackPanel Orientation="Vertical" Margin="10" Spacing="5">
       <!-- Inputs: Room number, Room members, Logo URL -->
       <StackPanel Orientation="Vertical" Spacing="5">
-        <NumericUpDown Name="RoomNumberInput" Width="NaN" HorizontalAlignment="Stretch" Watermark="Room number" Minimum="0" Increment="1" Value="{Binding Config.RoomNumber}" />
+        <NumericUpDown Width="NaN" HorizontalAlignment="Stretch" Watermark="Room number" Minimum="0" Increment="1" Value="{Binding Config.RoomNumber}" />
         
-        <TextBox Name="LogoUrlInput" Width="NaN" HorizontalAlignment="Stretch" Watermark="Logo URL" Text="{Binding Config.LogoUrl}" />
+        <TextBox Width="NaN" HorizontalAlignment="Stretch" Watermark="Logo URL" Text="{Binding Config.LogoUrl}" />
         
         <!-- <TextBox Grid.Row="2" Watermark="Enter room members" Width="NaN" HorizontalAlignment="Stretch" AcceptsReturn="True" Height="150" MaxHeight="150" TextWrapping="Wrap" UseFloatingWatermark="True" /> -->
-        <ListBox Width="NaN" HorizontalAlignment="Stretch" Height="300" ItemsSource="{Binding Config.RoomMembers}" ItemContainerTheme="{StaticResource ListBoxItemInset}">
+        <ListBox Width="NaN" HorizontalAlignment="Stretch" Height="300" ItemsSource="{Binding Config.RoomMembers, Mode=TwoWay}" ItemContainerTheme="{StaticResource ListBoxItemInset}">
           <ListBox.Styles>
             <Style Selector="ListBoxItem">
               <Setter Property="Height" Value="40" />
@@ -35,7 +35,7 @@
             <DataTemplate>
               <Grid ColumnDefinitions="Auto,*,Auto" HorizontalAlignment="Stretch" Background="Transparent">
                 <icons:MaterialIcon Grid.Column="0" Kind="Person" Width="24" Height="24" Margin="0,0,8,0" Foreground="Gray" />
-                <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Foreground="{DynamicResource MaterialDesignToolForeground}" />
+                <TextBox Grid.Column="1" Text="{Binding Name}" Width="NaN" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Center" Foreground="{DynamicResource MaterialDesignToolForeground}" />
                 <icons:MaterialIcon Grid.Column="2" Kind="ChevronRight" Width="24" Height="24" HorizontalAlignment="Right" Foreground="Gray" />
               </Grid>
             </DataTemplate>

@@ -12,6 +12,7 @@
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
       <TextBlock Text="Preview" />
       <TextBlock Text="{Binding Config.LogoUrl}" />
+      <ListBox ItemsSource="{Binding Config.RoomMembers}" />
     </StackPanel>
   </controls:Card>
 </UserControl>
