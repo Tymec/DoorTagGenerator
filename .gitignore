@@ -423,5 +423,6 @@ obj/
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,dotnetcore,visualstudiocode
 
-# Publish folder
+# Extra
 build/
+Avalonia.Themes.Neumorphism/

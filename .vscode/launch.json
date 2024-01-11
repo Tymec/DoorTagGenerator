@@ -9,8 +9,11 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "dotnet: build",
-            "program": "${workspaceFolder}/App/bin/Debug/net8.0/App.dll",
-            "args": [],
+            "program": "${workspaceFolder}/App/bin/Debug/net8.0/linux-x64/App.dll",
+            "args": [
+                "-c",
+                "Debug",
+            ],
             "cwd": "${workspaceFolder}/App",
             "stopAtEntry": false,
             "console": "integratedTerminal",

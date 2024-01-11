@@ -2,8 +2,8 @@ using Avalonia.Controls;
 
 namespace App.Views;
 
-public partial class MainWindow : Window {
-    public MainWindow() {
+public partial class PreviewView : UserControl {
+    public PreviewView() {
         InitializeComponent();
     }
 }

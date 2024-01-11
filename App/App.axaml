@@ -9,7 +9,7 @@
 >
     <Application.Styles>
         <!-- <FluentTheme /> -->
-        <theme:NeumorphismTheme BaseTheme="Light" PrimaryColor="Purple" SecondaryColor="Lime" />
+        <theme:NeumorphismTheme BaseTheme="Dark" PrimaryColor="Purple" SecondaryColor="Lime" />
 		    <icons:MaterialIconStyles />
     </Application.Styles>
 </Application>

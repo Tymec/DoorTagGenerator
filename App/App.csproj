@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType Condition="'$(Configuration.toUpper())' != 'DEBUG'">WinExe</OutputType>
-    <OutputType Condition="'$(Configuration.toUpper())' == 'DEBUG'">Exe</OutputType>
-    <DebugType>embedded</DebugType>
+    <OutputType Condition="'$(Configuration)' != 'Debug'">WinExe</OutputType>
+    <OutputType Condition="'$(Configuration)' == 'Debug'">Exe</OutputType>
+    <DebugType Condition="'$(Configuration)' != 'Debug'">embedded</DebugType>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
-    <PublishAot>true</PublishAot>
+    <!-- <PublishAot>true</PublishAot> -->
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <!-- <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile> -->
@@ -21,9 +21,14 @@
     <PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.6" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.6" />
-    <PackageReference Include="Neumorphism.Avalonia" Version="0.10.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Material.Icons.Avalonia" Version="2.1.0" />
+    <!-- <PackageReference Include="Neumorphism.Avalonia" Version="0.10.0" /> -->
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Avalonia.Themes.Neumorphism\Avalonia.Themes.Neumorphism.csproj" />
   </ItemGroup>
 </Project>
