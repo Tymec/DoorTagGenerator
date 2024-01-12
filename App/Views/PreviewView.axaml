@@ -9,10 +9,25 @@
              x:Class="App.Views.PreviewView"
              x:DataType="vm:PreviewViewModel">
   <controls:Card Theme="{StaticResource CardOutset}" Margin="10" CornerRadius="15">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-      <TextBlock Text="Preview" />
-      <TextBlock Text="{Binding Config.LogoUrl}" />
-      <ListBox ItemsSource="{Binding Config.RoomMembers}" />
+    <StackPanel Orientation="Vertical" Spacing="10">
+      <UniformGrid Rows="1">
+        <Image Source="{Binding LogoImage}" Width="300" Height="300" />
+        <TextBlock Text="{Binding Config.RoomNumber}" FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" />
+      </UniformGrid>
+
+      <TextBlock Text="Room members" HorizontalAlignment="Center" />
+      <ListBox ItemsSource="{Binding Config.RoomMembers, Mode=OneWay}" HorizontalAlignment="Stretch" Width="NaN">
+        <!-- <ListBox.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapPanel />
+          </ItemsPanelTemplate>
+        </ListBox.ItemsPanel> -->
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" />
+          </DataTemplate>
+        </ListBox.ItemTemplate> 
+      </ListBox>
     </StackPanel>
   </controls:Card>
 </UserControl>

@@ -1,21 +1,38 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using App.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Models;
 
-public partial class Configuration : ObservableObject {
+public partial class Configuration : ObservableValidator {
     [ObservableProperty]
     private string _logoUrl;
 
-    [ObservableProperty]
-    private int _roomNumber;
+    private string _roomNumber = "0";
+
+    public string RoomNumber {
+        get => _roomNumber;
+        set {
+            if (string.IsNullOrEmpty(value)) {
+                SetProperty(ref _roomNumber, "0");
+                return;
+            }
+
+            if (!int.TryParse(value, out _)) {
+                return;
+            }
+
+            SetProperty(ref _roomNumber, value);
+        }
+    }
 
     [ObservableProperty]
     private ObservableCollection<Person> _roomMembers;
 
     public Configuration() {
-        LogoUrl = "https://example.com/logo.png";
-        RoomNumber = 0;
+        LogoUrl = " ";
+        RoomNumber = "0";
         RoomMembers =
         [
             new Person { Name = "John" },
