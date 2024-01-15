@@ -5,6 +5,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:vm="clr-namespace:App.ViewModels;assembly=App"
   xmlns:views="clr-namespace:App.Views;assembly=App"
+  xmlns:controls="clr-namespace:Avalonia.Themes.Neumorphism.Controls;assembly=Avalonia.Themes.Neumorphism"
   mc:Ignorable="d" d:DesignWidth="920" d:DesignHeight="500"
   Width="1280" Height="720" MinWidth="920" MinHeight="500"
   WindowStartupLocation="CenterScreen"
@@ -22,7 +23,11 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     
-    <views:PreviewView Grid.Column="0" Grid.Row="0" DataContext="{Binding Preview}" />
-    <views:SettingsView Grid.Column="1" Grid.Row="0" DataContext="{Binding Settings}" />
+    <controls:Card Grid.Column="0" Grid.Row="0" Theme="{StaticResource CardOutset}" Margin="10" CornerRadius="15">
+      <views:PreviewView DataContext="{Binding Preview}" />
+    </controls:Card>
+    <controls:Card Grid.Column="1" Grid.Row="0" Theme="{StaticResource CardOutset}" Margin="10" CornerRadius="15">
+      <views:SettingsView DataContext="{Binding Settings}" />
+    </controls:Card>
   </Grid>
 </Window>
