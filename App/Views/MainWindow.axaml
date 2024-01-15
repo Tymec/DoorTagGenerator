@@ -1,19 +1,16 @@
-<Window
-  xmlns="https://github.com/avaloniaui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:vm="clr-namespace:App.ViewModels;assembly=App"
-  xmlns:views="clr-namespace:App.Views;assembly=App"
-  xmlns:controls="clr-namespace:Avalonia.Themes.Neumorphism.Controls;assembly=Avalonia.Themes.Neumorphism"
-  mc:Ignorable="d" d:DesignWidth="920" d:DesignHeight="500"
-  Width="1280" Height="720" MinWidth="920" MinHeight="500"
-  WindowStartupLocation="CenterScreen"
-  Title="App"
-  x:Class="App.Views.MainWindow"
-  x:DataType="vm:MainWindowViewModel"
-  x:CompileBindings="True"
->
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:App.ViewModels"
+        xmlns:views="using:App.Views"
+        xmlns:controls="using:Avalonia.Themes.Neumorphism.Controls"
+        mc:Ignorable="d" d:DesignWidth="920" d:DesignHeight="500"
+        Width="1280" Height="720" MinWidth="920" MinHeight="500"
+        WindowStartupLocation="CenterScreen"
+        Title="App"
+        x:Class="App.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel">
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="17*" />
@@ -24,10 +21,10 @@
     </Grid.RowDefinitions>
     
     <controls:Card Grid.Column="0" Grid.Row="0" Theme="{StaticResource CardOutset}" Margin="10" CornerRadius="15">
-      <views:PreviewView DataContext="{Binding Preview}" />
+      <views:PreviewView x:Name="Preview" DataContext="{Binding Preview}" />
     </controls:Card>
     <controls:Card Grid.Column="1" Grid.Row="0" Theme="{StaticResource CardOutset}" Margin="10" CornerRadius="15">
-      <views:SettingsView DataContext="{Binding Settings}" />
+      <views:SettingsView x:Name="Settings" DataContext="{Binding Settings}" />
     </controls:Card>
   </Grid>
 </Window>

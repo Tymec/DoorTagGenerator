@@ -2,27 +2,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:App.ViewModels;assembly=App"
-             xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:vm="using:App.ViewModels"
+             xmlns:icons="using:Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
              x:Class="App.Views.PreviewView"
              x:DataType="vm:PreviewViewModel">  
-  <UniformGrid Rows="2">
+  <UniformGrid Rows="2" Background="White">
     <Grid Row="0" ColumnDefinitions="1*,1*,1*">
       <!-- <Rectangle Grid.Column="0" Fill="Red"/> -->
       <Image Grid.Column="0" Source="{Binding LogoImage}"/>
       <!-- <Rectangle Grid.Column="1" Fill="Green"/> -->
-      <TextBlock Grid.Column="1" Text="{Binding Config.RoomNumber}" FontSize="36" FontWeight="Bold" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+      <TextBlock Grid.Column="1" Text="{Binding Config.RoomNumber}" FontSize="36" FontWeight="Bold" Foreground="Black" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
       <Rectangle Grid.Column="2" Fill="Transparent"/>
     </Grid>
   
     <Grid Row="1">
       <!-- <Rectangle Grid.Column="0" Fill="Yellow"/> -->
-      <TextBlock Text="Room members" HorizontalAlignment="Center" />
+      <TextBlock Text="Room members" HorizontalAlignment="Center" Foreground="Black" />
       <ListBox ItemsSource="{Binding Config.RoomMembers, Mode=OneWay}" HorizontalAlignment="Stretch" Width="NaN">
         <ListBox.ItemTemplate>
           <DataTemplate>
-            <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" />
+            <TextBlock Text="{Binding Name}" Foreground="Black" HorizontalAlignment="Left" />
           </DataTemplate>
         </ListBox.ItemTemplate> 
       </ListBox>

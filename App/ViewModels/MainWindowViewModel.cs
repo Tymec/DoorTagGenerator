@@ -3,8 +3,8 @@ using App.Models;
 namespace App.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase {
-    public PreviewViewModel Preview { get; set; }
-    public SettingsViewModel Settings { get; set; }
+    public PreviewViewModel Preview { get; }
+    public SettingsViewModel Settings { get; }
 
     public MainWindowViewModel() {
         Configuration config = new();

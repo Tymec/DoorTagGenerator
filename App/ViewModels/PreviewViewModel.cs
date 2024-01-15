@@ -1,26 +1,18 @@
 using System;
-using System.IO;
-using System.Net.Http;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using App.Helpers;
 using App.Models;
 using Avalonia.Media.Imaging;
+using CommunityToolkit.Mvvm.ComponentModel;
 using ReactiveUI;
 
 namespace App.ViewModels;
 
-public class PreviewViewModel : ViewModelBase {
-    private static readonly HttpClient _httpClient = new();
-
+public partial class PreviewViewModel : ViewModelBase {
+    [ObservableProperty]
     private Bitmap? _logoImage = ImageHelper.LoadFromResource("Placeholder.png");
 
     public Configuration Config { get; }
-
-    public Bitmap? LogoImage {
-        get => _logoImage;
-        private set => this.RaiseAndSetIfChanged(ref _logoImage, value);
-    }
 
     public PreviewViewModel(Configuration config) {
         Config = config;

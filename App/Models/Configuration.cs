@@ -1,16 +1,13 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
-using App.Validations;
-using System.ComponentModel.DataAnnotations;
 
 namespace App.Models;
 
-public partial class Configuration : ObservableValidator {
+public partial class Configuration : ObservableObject {
     [ObservableProperty]
     private string _logoUrl;
 
     private string _roomNumber = "0";
-
     public string RoomNumber {
         get => _roomNumber;
         set {
@@ -45,5 +42,11 @@ public partial class Configuration : ObservableValidator {
             new Person { Name = "Walter" },
             new Person { Name = "Carol" },
         ];
+    }
+
+    public void CopyFrom(Configuration other) {
+        LogoUrl = other.LogoUrl;
+        RoomNumber = other.RoomNumber;
+        RoomMembers = other.RoomMembers;
     }
 }
