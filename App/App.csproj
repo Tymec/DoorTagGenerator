@@ -27,10 +27,12 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="QuestPDF" Version="2023.12.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Avalonia.Themes.Neumorphism\Avalonia.Themes.Neumorphism.csproj" />
+    <!-- Git submodule -->
+    <ProjectReference Include="..\Neumorphism.Avalonia\Avalonia.Themes.Neumorphism\Avalonia.Themes.Neumorphism.csproj" />
   </ItemGroup>
 
   <ItemGroup>

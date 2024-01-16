@@ -7,17 +7,46 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Text.Json;
 using Avalonia.Platform.Storage;
-using System.Drawing;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.IO;
 
 namespace App.ViewModels;
 
 public partial class SettingsViewModel : ViewModelBase {
-    private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
+    private static readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
+
+    [ObservableProperty]
+    private string _logoUrl = string.Empty;
 
     public Configuration Config { get; private set; }
 
     public SettingsViewModel(Configuration config) {
         Config = config;
+    }
+
+    [RelayCommand]
+    private async Task LoadLogoFile(CancellationToken token) {
+        ErrorMessages?.Clear();
+
+        try {
+            var filesService = (
+                App.Current?.Services?.GetService<FileService>()
+            ) ?? throw new NullReferenceException("Missing FileService instance.");
+
+            var file = await filesService.OpenFile(
+                title: "Select logo image",
+                FilePickerFileTypes.ImageAll
+            );
+            if (file is null) return;
+
+            await using var fileStream = await file.OpenReadAsync();
+            using var memoryStream = new MemoryStream();
+
+            fileStream.CopyTo(memoryStream);
+            Config.Logo = memoryStream.ToArray();
+        } catch (Exception e) {
+            ErrorMessages?.Add(e.Message);
+        }
     }
 
     [RelayCommand]
@@ -74,27 +103,8 @@ public partial class SettingsViewModel : ViewModelBase {
     private async Task Print(CancellationToken token) {
         ErrorMessages?.Clear();
 
-        // TODO: Generate PDF using QuestPDF
-
         try {
-            var filesService = (
-                App.Current?.Services?.GetService<FileService>()
-            ) ?? throw new NullReferenceException("Missing FileService instance.");
-
-            var printService = (
-                App.Current?.Services?.GetService<PrintService>()
-            ) ?? throw new NullReferenceException("Missing PrintService instance.");
-
-            var file = await filesService.SaveFile(
-                title: "Save Image File",
-                suggestedName: "preview",
-                defaultExtension: ".png",
-                FilePickerFileTypes.ImageAll
-            );
-            if (file is null) return;
-
-            await using var writeStream = await file.OpenWriteAsync();
-            printService.Rasterize("Preview", writeStream);
+            // TODO: Implement
         } catch (Exception e) {
             ErrorMessages?.Add(e.Message);
         }

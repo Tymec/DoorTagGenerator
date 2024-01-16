@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using App.Views;
 using App.Services;
 using App.ViewModels;
+using QuestPDF.Infrastructure;
 
 namespace App;
 
@@ -16,6 +17,8 @@ public partial class App : Application {
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
     public override void OnFrameworkInitializationCompleted() {
+        QuestPDF.Settings.License = LicenseType.Community;
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
             desktop.MainWindow = new MainWindow {
                 DataContext = new MainWindowViewModel()
@@ -23,7 +26,6 @@ public partial class App : Application {
 
             var services = new ServiceCollection();
             services.AddSingleton(x => new FileService(desktop.MainWindow));
-            services.AddSingleton(x => new PrintService(desktop.MainWindow));
             Services = services.BuildServiceProvider();
         }
 

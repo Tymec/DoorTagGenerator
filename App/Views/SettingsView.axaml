@@ -14,8 +14,16 @@
     <StackPanel Orientation="Vertical" Spacing="5">
       <TextBox Width="NaN" HorizontalAlignment="Stretch" Watermark="Room number" Text="{Binding Config.RoomNumber}" />
       
-      <TextBox Width="NaN" HorizontalAlignment="Stretch" Watermark="Logo URL" Text="{Binding Config.LogoUrl}" />
-      
+      <!-- <TextBox Width="NaN" HorizontalAlignment="Stretch" Watermark="Logo URL" Text="{Binding Config.LogoUrl}" /> -->
+      <Grid Grid.ColumnDefinitions="1*,Auto">
+        <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Watermark="Logo URL" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding LogoUrl}" />
+        <Button Grid.Column="1" CornerRadius="12" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}" Margin="10,0,0,0" Command="{Binding LoadLogoFileCommand}">
+          <Button.Content>
+            <icons:MaterialIcon Kind="FileImage" Width="24" Height="24" />
+          </Button.Content>
+        </Button>
+      </Grid>
+
       <!-- <TextBox Grid.Row="2" Watermark="Enter room members" Width="NaN" HorizontalAlignment="Stretch" AcceptsReturn="True" Height="150" MaxHeight="150" TextWrapping="Wrap" UseFloatingWatermark="True" /> -->
       <ListBox Width="NaN" HorizontalAlignment="Stretch" Height="0" ItemsSource="{CompiledBinding Config.RoomMembers, Mode=TwoWay}" ItemContainerTheme="{StaticResource ListBoxItemInset}">
         <ListBox.Styles>

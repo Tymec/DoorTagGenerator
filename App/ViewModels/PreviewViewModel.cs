@@ -10,23 +10,34 @@ namespace App.ViewModels;
 
 public partial class PreviewViewModel : ViewModelBase {
     [ObservableProperty]
-    private Bitmap? _logoImage = ImageHelper.LoadFromResource("Placeholder.png");
+    private Bitmap? _documentImage;
 
     public Configuration Config { get; }
 
     public PreviewViewModel(Configuration config) {
         Config = config;
 
-        this.WhenAnyValue(x => x.Config.LogoUrl)
+        this.WhenAnyValue(x => x.Config.Logo)
+            .Where(x => x != null)
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(BuildDocument);
+
+        this.WhenAnyValue(x => x.Config.RoomNumber)
             .Where(x => !string.IsNullOrEmpty(x))
             .ObserveOn(RxApp.MainThreadScheduler)
-            .Subscribe(LoadLogo);
+            .Subscribe(BuildDocument);
+
+        this.WhenAnyValue(x => x.Config.RoomMembers)
+            .Where(x => x.Count > 0)
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(BuildDocument);
     }
 
-    public async void LoadLogo(string url) {
-        var image = await ImageHelper.LoadFromUrl(url);
-        if (image is not null) {
-            LogoImage = image;
+    private void BuildDocument(object? _) {
+        var doc = DocumentBuilder.Build(Config);
+        var images = doc.ToImage();
+        if (images != null && images.Count > 0) {
+            DocumentImage = images[0];
         }
     }
 }
