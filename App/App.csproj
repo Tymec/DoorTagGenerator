@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Defaults -->
   <PropertyGroup>
     <OutputType Condition="'$(Configuration)' != 'Debug'">WinExe</OutputType>
     <OutputType Condition="'$(Configuration)' == 'Debug'">Exe</OutputType>
@@ -17,11 +18,18 @@
 
   <!-- <PropertyGroup Condition="'$(OS)' == 'Windows_NT'"> -->
   <PropertyGroup>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <TargetFramework>net8.0-windows</TargetFramework>
     <DefineConstants>_WINDOWS</DefineConstants>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsWindows Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IsWindows>
+    <IsLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</IsLinux>
+    <IsOSX Condition="$([MSBuild]::IsOSPlatform('OSX'))">true</IsOSX>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,7 +47,6 @@
 
   <ItemGroup>
     <!-- <PackageReference Include="Neumorphism.Avalonia" Version="0.10.0" /> -->
-    <!-- Git submodule -->
     <ProjectReference Include="..\Neumorphism.Avalonia\Avalonia.Themes.Neumorphism\Avalonia.Themes.Neumorphism.csproj" />
   </ItemGroup>
 
