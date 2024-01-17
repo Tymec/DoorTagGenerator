@@ -5,26 +5,32 @@
         xmlns:vm="using:App.ViewModels"
         xmlns:views="using:App.Views"
         xmlns:controls="using:Avalonia.Themes.Neumorphism.Controls"
-        mc:Ignorable="d" d:DesignWidth="920" d:DesignHeight="500"
-        Width="1280" Height="720" MinWidth="920" MinHeight="500"
+        xmlns:assist="using:Avalonia.Themes.Neumorphism.Assist"
+        mc:Ignorable="d" d:DesignWidth="1162" d:DesignHeight="620"
+        Width="1353" Height="720" MinWidth="1162" MinHeight="620"
         WindowStartupLocation="CenterScreen"
         Title="App"
         x:Class="App.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel">
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="17*" />
-      <ColumnDefinition Width="8*" />
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-    
-    <controls:Card Grid.Column="0" Grid.Row="0" Theme="{StaticResource CardOutset}" Padding="0" Margin="10" CornerRadius="15">
-      <views:PreviewView x:Name="Preview" DataContext="{Binding Preview}" />
-    </controls:Card>
-    <controls:Card Grid.Column="1" Grid.Row="0" Theme="{StaticResource CardOutset}" Margin="10" CornerRadius="15">
-      <views:SettingsView x:Name="Settings" DataContext="{Binding Settings}" />
-    </controls:Card>
-  </Grid>
+  <controls:SnackbarHost Grid.Row="1" HostName="Root"
+                        SnackbarHorizontalAlignment="Center"
+                        SnackbarVerticalAlignment="Bottom"
+                        assist:SnackbarHostAssist.SnackbarHeight="50">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="17*" />
+        <ColumnDefinition Width="8*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      
+      <controls:Card Grid.Column="0" Grid.Row="0" Theme="{StaticResource CardOutset}" Padding="0" Margin="10" CornerRadius="15">
+        <views:PreviewView x:Name="Preview" DataContext="{Binding Preview}" />
+      </controls:Card>
+      <controls:Card Grid.Column="1" Grid.Row="0" Theme="{StaticResource CardOutset}" Margin="10" CornerRadius="15">
+        <views:SettingsView x:Name="Settings" DataContext="{Binding Settings}" />
+      </controls:Card>
+    </Grid>
+  </controls:SnackbarHost>
 </Window>

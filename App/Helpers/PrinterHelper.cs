@@ -11,12 +11,14 @@ namespace App.Helpers;
 
 public static class PrinterHelper {
     public static bool Print(string xpsPath) {
-        if (OperatingSystem.IsWindows()) {
+        if (!OperatingSystem.IsWindows()) {
             throw new PlatformNotSupportedException("Printing is only supported on Windows.");
         }
 
+        // Landscape letter
         PrintTicket ticket = new() {
             PageOrientation = PageOrientation.Landscape,
+            PageMediaSize = new PageMediaSize(PageMediaSizeName.NorthAmericaLetter),
         };
 
         PrintDialog dialog = new() {

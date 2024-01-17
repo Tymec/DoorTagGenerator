@@ -26,7 +26,18 @@ public partial class Configuration : ObservableObject {
     }
 
     [ObservableProperty]
-    private ObservableCollection<Person> _roomMembers = [];
+    private ObservableCollection<Person> _roomMembers = [
+        new() { Name = "John Doe" },
+        new() { Name = "Marcus Aurelius" },
+        new() { Name = "Veronica Mars" },
+        new() { Name = "Thomas Anderson" },
+        new() { Name = "Bruce Wayne" },
+        new() { Name = "Tony Stark" },
+        new() { Name = "Peter Parker" },
+        new() { Name = "Clark Kent" },
+        new() { Name = "Diana Prince" },
+        new() { Name = "Natasha Romanoff" },
+    ];
 
     public void CopyFrom(Configuration other) {
         Logo = other.Logo;

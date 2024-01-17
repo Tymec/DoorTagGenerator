@@ -18,21 +18,19 @@ public partial class PreviewViewModel : ViewModelBase {
     public PreviewViewModel(Configuration config) {
         Config = config;
 
-        // config.WhenAnyPropertyChanged()
-        // .Throttle(TimeSpan.FromMilliseconds(500))
-        // .ObserveOn(RxApp.MainThreadScheduler)
-        // .Subscribe(BuildDocument);
-
-        // Dont block the UI thread
         config.WhenAnyPropertyChanged()
             .Throttle(TimeSpan.FromMilliseconds(200))
-            .ObserveOn(RxApp.TaskpoolScheduler) // NOTE: What does this do?
-            .Subscribe(BuildDocument);
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(_ => BuildDocument());
+
+        config.RoomMembers.ToObservableChangeSet()
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(_ => BuildDocument());
 
         BuildDocument();
     }
 
-    private void BuildDocument(object? _ = null) {
+    private void BuildDocument() {
         var doc = DocumentBuilder.Build(Config);
 
         var images = doc.ToBitmap();

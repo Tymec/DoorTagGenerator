@@ -13,6 +13,7 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using App.Helpers;
 using QuestPDF.Fluent;
+using System.Linq;
 
 namespace App.ViewModels;
 
@@ -50,26 +51,42 @@ public partial class SettingsViewModel : ViewModelBase {
         }
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanAddRoomMember))]
     private async Task AddRoomMember(string name, CancellationToken token) {
         ErrorMessages?.Clear();
 
         try {
-            Console.WriteLine(name);
+            await Task.Run(() => {
+                Config.RoomMembers.Add(new Person() { Name = name });
+                RoomMember = string.Empty;
+            }, token);
         } catch (Exception e) {
             ErrorMessages?.Add(e.Message);
         }
     }
 
-    [RelayCommand]
-    private async Task RemoveRoomMember(int index, CancellationToken token) {
+    private bool CanAddRoomMember(string name) {
+        return !string.IsNullOrEmpty(name) && !Config.RoomMembers.Any(x => x.Name == name);
+    }
+
+    [RelayCommand(CanExecute = nameof(CanRemoveRoomMember))]
+    private async Task RemoveRoomMember(string name, CancellationToken token) {
         ErrorMessages?.Clear();
 
         try {
-
+            await Task.Run(() => {
+                var member = Config.RoomMembers.FirstOrDefault(x => x.Name == name);
+                if (member is not null) {
+                    Config.RoomMembers.Remove(member);
+                }
+            }, token);
         } catch (Exception e) {
             ErrorMessages?.Add(e.Message);
         }
+    }
+
+    private bool CanRemoveRoomMember(string name) {
+        return !string.IsNullOrEmpty(name) && Config.RoomMembers.Any(x => x.Name == name);
     }
 
     [RelayCommand]
@@ -164,10 +181,8 @@ public partial class SettingsViewModel : ViewModelBase {
                 return tempFile;
             }, token);
 
-            Console.WriteLine($"Printing {path}");
-
             if (!PrinterHelper.Print(path)) {
-                ErrorMessages?.Add("Printing failed.");
+                throw new Exception("Printing failed.");
             }
 
             File.Delete(path);
