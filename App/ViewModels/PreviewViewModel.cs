@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using DynamicData.Binding;
 using App.Models;
 using App.Helpers;
+using ReactiveUI;
 
 namespace App.ViewModels;
 
@@ -16,7 +17,18 @@ public partial class PreviewViewModel : ViewModelBase {
 
     public PreviewViewModel(Configuration config) {
         Config = config;
-        config.WhenAnyPropertyChanged().Subscribe(BuildDocument);
+
+        // config.WhenAnyPropertyChanged()
+        // .Throttle(TimeSpan.FromMilliseconds(500))
+        // .ObserveOn(RxApp.MainThreadScheduler)
+        // .Subscribe(BuildDocument);
+
+        // Dont block the UI thread
+        config.WhenAnyPropertyChanged()
+            .Throttle(TimeSpan.FromMilliseconds(200))
+            .ObserveOn(RxApp.TaskpoolScheduler) // NOTE: What does this do?
+            .Subscribe(BuildDocument);
+
         BuildDocument();
     }
 

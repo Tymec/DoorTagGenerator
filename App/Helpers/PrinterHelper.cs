@@ -5,18 +5,18 @@ using System.Windows.Controls;
 using System.Windows.Xps.Packaging;
 using System.Windows;
 using System.Printing;
+// TODO: Might have to conditionally import Windows-specific namespaces
 
-namespace App.Services;
+namespace App.Helpers;
 
-public class WindowsPrinterService : IPrintService {
-    public bool PrintImage(byte[] data) {
-        return false;
-    }
+public static class PrinterHelper {
+    public static bool Print(string xpsPath) {
+        if (OperatingSystem.IsWindows()) {
+            throw new PlatformNotSupportedException("Printing is only supported on Windows.");
+        }
 
-    public bool PrintXps(string path) {
         PrintTicket ticket = new() {
             PageOrientation = PageOrientation.Landscape,
-            PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4),
         };
 
         PrintDialog dialog = new() {
@@ -30,16 +30,15 @@ public class WindowsPrinterService : IPrintService {
             return false;
         }
 
-        try {
-            XpsDocument doc = new(path, FileAccess.Read);
-            FixedDocumentSequence fixedDocSeq = doc.GetFixedDocumentSequence();
-            DocumentPaginator docPaginator = fixedDocSeq.DocumentPaginator;
-            dialog.PrintDocument(docPaginator, $"Printing {Path.GetFileName(path)}");
+        XpsDocument xpsDocument = new(xpsPath, FileAccess.Read);
+        FixedDocumentSequence fixedDocSeq = xpsDocument.GetFixedDocumentSequence();
+        DocumentPaginator paginator = fixedDocSeq.DocumentPaginator;
 
+        try {
+            dialog.PrintDocument(paginator, "Printing document");
             return true;
         } catch (Exception e) {
             MessageBox.Show(e.Message);
-
             return false;
         }
     }

@@ -6,7 +6,7 @@ namespace App.Models;
 
 public partial class Configuration : ObservableObject {
     [ObservableProperty]
-    private byte[]? _logo = Placeholders.Image(500, 500);
+    private byte[] _logo = Placeholders.Image(500, 500);
 
     private string _roomNumber = "0";
     public string RoomNumber {

@@ -12,33 +12,28 @@ public static class DocumentBuilder {
     public static Document Build(Configuration config) {
         return Document.Create(container => {
             container.Page(page => {
-                page.Size(PageSizes.A4);
+                page.Size(PageSizes.Letter.Landscape());
                 page.Margin(2, Unit.Centimetre);
                 page.PageColor(Colors.White);
                 page.DefaultTextStyle(x => x.FontSize(20));
 
-                page.Header()
-                    .Text(config.RoomNumber)
-                    .SemiBold().FontSize(36).FontColor(Colors.Blue.Medium);
-
                 page.Content()
                     .PaddingVertical(1, Unit.Centimetre)
-                    .Column(x => {
-                        x.Spacing(20);
+                    .Column(row => {
+                        row.Item()
+                            .BorderBottom(2)
+                            .BorderColor(Colors.Red.Medium)
+                            .Row(col => {
+                                col.RelativeItem().Image(config.Logo).FitArea();
 
-                        x.Item().Text(string.Join(", ", config.RoomMembers));
+                                col.RelativeItem().Text(config.RoomNumber).SemiBold().FontSize(36).FontColor(Colors.Blue.Medium);
+                            });
 
-                        if (config.Logo != null)
-                            x.Item().Image(config.Logo).FitArea();
-                        else
-                            x.Item().Text("No image");
-                    });
+                        row.Item()
+                            .Text(string.Join(", ", config.RoomMembers))
+                            .FontSize(18)
+                            .FontColor(Colors.Blue.Medium);
 
-                page.Footer()
-                    .AlignCenter()
-                    .Text(x => {
-                        x.Span("Page ");
-                        x.CurrentPageNumber();
                     });
             });
         });

@@ -22,6 +22,9 @@ public partial class SettingsViewModel : ViewModelBase {
     [ObservableProperty]
     private string _logoUrl = string.Empty;
 
+    [ObservableProperty]
+    private string _roomMember = string.Empty;
+
     public Configuration Config { get; private set; }
 
     public SettingsViewModel(Configuration config) {
@@ -42,6 +45,28 @@ public partial class SettingsViewModel : ViewModelBase {
         try {
             var image = await ImageHelper.LoadFromUrl(new Uri(url)) ?? throw new Exception("Invalid image format.");
             Config.Logo = image;
+        } catch (Exception e) {
+            ErrorMessages?.Add(e.Message);
+        }
+    }
+
+    [RelayCommand]
+    private async Task AddRoomMember(string name, CancellationToken token) {
+        ErrorMessages?.Clear();
+
+        try {
+            Console.WriteLine(name);
+        } catch (Exception e) {
+            ErrorMessages?.Add(e.Message);
+        }
+    }
+
+    [RelayCommand]
+    private async Task RemoveRoomMember(int index, CancellationToken token) {
+        ErrorMessages?.Clear();
+
+        try {
+
         } catch (Exception e) {
             ErrorMessages?.Add(e.Message);
         }
@@ -129,23 +154,40 @@ public partial class SettingsViewModel : ViewModelBase {
         ErrorMessages?.Clear();
 
         try {
-            var printerService = (
-                App.Current?.Services?.GetService<IPrintService>()
-            ) ?? throw new NullReferenceException("Missing PrinterService instance.");
+#if WINDOWS
+            string path = await Task.Run(() => {
+                var doc = DocumentBuilder.Build(Config);
 
-            // await Task.Run(() => {
-            //     var doc = DocumentBuilder.Build(Config);
-            //     var tempFile = Path.GetTempFileName();
-            //     doc.GenerateXps(tempFile);
+                string tempFile = Path.GetTempFileName() + ".xps";
+                doc.GenerateXps(tempFile);
 
-            //     return printerService.PrintXps(tempFile);
-            // }, token);
+                return tempFile;
+            }, token);
 
+            Console.WriteLine($"Printing {path}");
+
+            if (!PrinterHelper.Print(path)) {
+                ErrorMessages?.Add("Printing failed.");
+            }
+
+            File.Delete(path);
+#else
+            var filesService = (
+                App.Current?.Services?.GetService<FileService>()
+            ) ?? throw new NullReferenceException("Missing FileService instance.");
+
+            var file = await filesService.SaveFile(
+                title: "Save PDF File",
+                suggestedName: "document",
+                defaultExtension: ".pdf",
+            FilePickerFileTypes.Pdf
+            );
+            if (file is null) return;
+
+            await using var writeStream = await file.OpenWriteAsync();
             var doc = DocumentBuilder.Build(Config);
-            var tempFile = Path.GetTempFileName();
-            doc.GenerateXps(tempFile);
-
-            printerService.PrintXps(tempFile);
+            doc.GeneratePdf(writeStream);
+#endif
         } catch (Exception e) {
             ErrorMessages?.Add(e.Message);
         }

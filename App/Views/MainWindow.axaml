@@ -20,7 +20,7 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     
-    <controls:Card Grid.Column="0" Grid.Row="0" Theme="{StaticResource CardOutset}" Margin="10" CornerRadius="15">
+    <controls:Card Grid.Column="0" Grid.Row="0" Theme="{StaticResource CardOutset}" Padding="0" Margin="10" CornerRadius="15">
       <views:PreviewView x:Name="Preview" DataContext="{Binding Preview}" />
     </controls:Card>
     <controls:Card Grid.Column="1" Grid.Row="0" Theme="{StaticResource CardOutset}" Margin="10" CornerRadius="15">

@@ -26,11 +26,6 @@ public partial class App : Application {
 
             var services = new ServiceCollection();
             services.AddSingleton(x => new FileService(desktop.MainWindow));
-#if _WINDOWS
-            services.AddSingleton<IPrintService, WindowsPrinterService>();
-// #else
-//             services.AddSingleton<IPrintService, LinuxPrinterService>();
-#endif
             Services = services.BuildServiceProvider();
         }
 

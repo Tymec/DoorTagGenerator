@@ -16,8 +16,8 @@
       
       <!-- <TextBox Width="NaN" HorizontalAlignment="Stretch" Watermark="Logo URL" Text="{Binding Config.LogoUrl}" /> -->
       <Grid Grid.ColumnDefinitions="1*,Auto">
-        <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Logo URL" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding LogoUrl}" />
-        <Button Grid.Column="1" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}" Command="{Binding LoadLogoFileCommand}">
+        <TextBox Grid.Column="0" Name="LogoUrlInput" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Logo URL" HorizontalAlignment="Stretch" Width="NaN" />
+        <Button Grid.Column="1" CornerRadius="10" Height="{Binding #LogoUrlInput.Height}" Width="{Binding $self.Bounds.Height}" Command="{Binding LoadLogoFileCommand}" CommandParameter="{Binding #LogoUrlInput.Text}" >
           <Button.Content>
             <icons:MaterialIcon Kind="FileImage" Width="24" Height="24" />
           </Button.Content>
@@ -25,29 +25,40 @@
       </Grid>
 
       <!-- <TextBox Grid.Row="2" Watermark="Enter room members" Width="NaN" HorizontalAlignment="Stretch" AcceptsReturn="True" Height="150" MaxHeight="150" TextWrapping="Wrap" UseFloatingWatermark="True" /> -->
-      <ListBox Width="NaN" HorizontalAlignment="Stretch" Height="0" ItemsSource="{CompiledBinding Config.RoomMembers, Mode=TwoWay}" ItemContainerTheme="{StaticResource ListBoxItemInset}">
-        <ListBox.Styles>
-          <Style Selector="ListBoxItem">
-            <Setter Property="Height" Value="40" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="Margin" Value="0,0,0,0" />
-          </Style>
-        </ListBox.Styles>
-        <ListBox.ItemsPanel>
-          <ItemsPanelTemplate>
-            <StackPanel Orientation="Vertical" Spacing="5" />
-          </ItemsPanelTemplate>
-        </ListBox.ItemsPanel>
-        <ListBox.ItemTemplate>
-          <DataTemplate>
-            <Grid ColumnDefinitions="Auto,*,Auto" HorizontalAlignment="Stretch" Background="Transparent">
-              <icons:MaterialIcon Grid.Column="0" Kind="Person" Width="24" Height="24" Margin="0,0,8,0" Foreground="Gray" />
-              <TextBox Grid.Column="1" Text="{CompiledBinding Name}" Width="NaN" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Center" Foreground="{DynamicResource MaterialDesignToolForeground}" />
-              <icons:MaterialIcon Grid.Column="2" Kind="ChevronRight" Width="24" Height="24" HorizontalAlignment="Right" Foreground="Gray" />
-            </Grid>
-          </DataTemplate>
-        </ListBox.ItemTemplate>
-      </ListBox>
+      <StackPanel>
+        <ListBox Width="NaN" HorizontalAlignment="Stretch" Height="0" ItemsSource="{CompiledBinding Config.RoomMembers, Mode=TwoWay}" ItemContainerTheme="{StaticResource ListBoxItemInset}">
+          <ListBox.Styles>
+            <Style Selector="ListBoxItem">
+              <Setter Property="Height" Value="40" />
+              <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+              <Setter Property="Margin" Value="0,0,0,0" />
+            </Style>
+          </ListBox.Styles>
+          <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Vertical" Spacing="5" />
+            </ItemsPanelTemplate>
+          </ListBox.ItemsPanel>
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid ColumnDefinitions="Auto,*,Auto" HorizontalAlignment="Stretch" Background="Transparent">
+                <icons:MaterialIcon Grid.Column="0" Kind="Person" Width="24" Height="24" Margin="0,0,8,0" Foreground="Gray" />
+                <TextBox Grid.Column="1" Text="{CompiledBinding Name}" Width="NaN" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Center" Foreground="{DynamicResource MaterialDesignToolForeground}" />
+                <icons:MaterialIcon Grid.Column="2" Kind="ChevronRight" Width="24" Height="24" HorizontalAlignment="Right" Foreground="Gray" />
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <Grid Grid.ColumnDefinitions="1*,Auto">
+          <TextBox Grid.Column="0" Name="RoomMemberName" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Room member name" HorizontalAlignment="Stretch" Width="NaN" />
+          <Button Grid.Column="1" CornerRadius="10" Height="{Binding #RoomMemberName.Height}" Width="{Binding $self.Bounds.Height}" Command="{Binding AddRoomMemberCommand}" CommandParameter="{Binding #RoomMemberName.Text}">
+            <Button.Content>
+              <icons:MaterialIcon Kind="Plus" Width="24" Height="24" />
+            </Button.Content>
+          </Button>
+        </Grid>
+      </StackPanel>
     </StackPanel>
       
     <!-- Buttons: Save, Load, Print -->

@@ -6,8 +6,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
              x:Class="App.Views.PreviewView"
              x:DataType="vm:PreviewViewModel">  
-  <DockPanel>
+  <Grid>
     <!-- <Rectangle Fill="Red" /> -->
-    <Image Source="{Binding DocumentImage}" />
-  </DockPanel>
+    <Image Source="{Binding DocumentImage}" Stretch="Uniform" />
+  </Grid>
 </UserControl>
