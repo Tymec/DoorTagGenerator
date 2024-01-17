@@ -16,8 +16,8 @@
       
       <!-- <TextBox Width="NaN" HorizontalAlignment="Stretch" Watermark="Logo URL" Text="{Binding Config.LogoUrl}" /> -->
       <Grid Grid.ColumnDefinitions="1*,Auto">
-        <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Watermark="Logo URL" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding LogoUrl}" />
-        <Button Grid.Column="1" CornerRadius="12" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}" Margin="10,0,0,0" Command="{Binding LoadLogoFileCommand}">
+        <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Logo URL" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding LogoUrl}" />
+        <Button Grid.Column="1" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}" Command="{Binding LoadLogoFileCommand}">
           <Button.Content>
             <icons:MaterialIcon Kind="FileImage" Width="24" Height="24" />
           </Button.Content>

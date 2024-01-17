@@ -10,12 +10,15 @@ namespace App.Helpers;
 public static class ImageHelper {
     private static readonly HttpClient httpClient = new();
 
-    public static Bitmap LoadFromResource(string resourceName) {
+    public static byte[] LoadFromResource(string resourceName) {
         var uri = new Uri($"avares://App/Assets/{resourceName}");
-        return new Bitmap(AssetLoader.Open(uri));
+        var readStream = AssetLoader.Open(uri);
+        var memoryStream = new MemoryStream();
+        readStream.CopyTo(memoryStream);
+        return memoryStream.ToArray();
     }
 
-    public static async Task<Bitmap?> LoadFromUrl(Uri uri) {
+    public static async Task<byte[]?> LoadFromUrl(Uri uri) {
         try {
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
@@ -26,18 +29,10 @@ public static class ImageHelper {
             if (contentType.MediaType != "image/jpeg" && contentType.MediaType != "image/png") return null;
 
             var data = await response.Content.ReadAsByteArrayAsync();
-            return new Bitmap(new MemoryStream(data));
+            return data;
         } catch (HttpRequestException ex) {
             Console.WriteLine($"An error occurred while downloading image '{uri}': {ex.Message}");
         }
-
-        return null;
-    }
-
-    public static async Task<Bitmap?> LoadFromUrl(string url) {
-        if (Uri.TryCreate(url, UriKind.Absolute, out var uri) &&
-            (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)
-        ) return await LoadFromUrl(uri);
 
         return null;
     }

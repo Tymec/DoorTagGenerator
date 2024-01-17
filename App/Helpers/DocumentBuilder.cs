@@ -29,7 +29,7 @@ public static class DocumentBuilder {
                         x.Item().Text(string.Join(", ", config.RoomMembers));
 
                         if (config.Logo != null)
-                            x.Item().Image(config.Logo);
+                            x.Item().Image(config.Logo).FitArea();
                         else
                             x.Item().Text("No image");
                     });
@@ -44,7 +44,7 @@ public static class DocumentBuilder {
         });
     }
 
-    public static List<Bitmap> ToImage(this Document doc, int dpi = 96) {
+    public static List<Bitmap> ToBitmap(this Document doc, int dpi = 96) {
         ImageGenerationSettings opts = new() {
             RasterDpi = dpi
         };

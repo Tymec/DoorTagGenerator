@@ -17,7 +17,7 @@ public partial class Configuration : ObservableObject {
                 return;
             }
 
-            if (!int.TryParse(value, out _)) {
+            if (!long.TryParse(value, out _)) {
                 return;
             }
 
@@ -26,17 +26,7 @@ public partial class Configuration : ObservableObject {
     }
 
     [ObservableProperty]
-    private ObservableCollection<Person> _roomMembers = [
-        new Person { Name = "John" },
-        new Person { Name = "Veronica" },
-        new Person { Name = "Alice" },
-        new Person { Name = "Bob" },
-        new Person { Name = "Eve" },
-        new Person { Name = "Mallory" },
-        new Person { Name = "Trent" },
-        new Person { Name = "Walter" },
-        new Person { Name = "Carol" },
-    ];
+    private ObservableCollection<Person> _roomMembers = [];
 
     public void CopyFrom(Configuration other) {
         Logo = other.Logo;

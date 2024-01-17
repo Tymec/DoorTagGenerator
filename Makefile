@@ -22,6 +22,9 @@ windows:
 
 publish: build linux windows
 
+demo:
+	@cd Neumorphism.Avalonia/Neumorphism.Avalonia.Demo && dotnet run
+
 dev:
 	@dotnet run --project App -r win-x64 -c Debug
 

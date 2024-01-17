@@ -5,13 +5,13 @@ using Avalonia.Platform.Storage;
 namespace App.Services;
 
 public class FileService(Window target) {
+    private readonly IStorageProvider _provider = target.StorageProvider;
+
     public static readonly FilePickerFileType Json = new("JSON") {
         Patterns = ["*.json"],
         AppleUniformTypeIdentifiers = ["public.json"],
         MimeTypes = ["application/json"]
     };
-
-    private readonly IStorageProvider _provider = target.StorageProvider;
 
     public async Task<IStorageFile?> OpenFile(string title = "Open File", params FilePickerFileType[] types) {
         var files = await _provider.OpenFilePickerAsync(new FilePickerOpenOptions() {

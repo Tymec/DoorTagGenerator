@@ -1,14 +1,18 @@
+using System;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using App.Models;
 using App.Services;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Text.Json;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.IO;
+using System.Reactive.Linq;
+using ReactiveUI;
+using App.Helpers;
+using QuestPDF.Fluent;
 
 namespace App.ViewModels;
 
@@ -22,6 +26,25 @@ public partial class SettingsViewModel : ViewModelBase {
 
     public SettingsViewModel(Configuration config) {
         Config = config;
+
+        this.WhenAnyValue(x => x.LogoUrl)
+            .Throttle(TimeSpan.FromMilliseconds(500))
+            .Where(x => !string.IsNullOrEmpty(x) && Uri.TryCreate(x, UriKind.Absolute, out var _))
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(LoadLogoUrl);
+    }
+
+    private async void LoadLogoUrl(string url) {
+        Console.WriteLine($"Loading logo from {url}");
+
+        ErrorMessages?.Clear();
+
+        try {
+            var image = await ImageHelper.LoadFromUrl(new Uri(url)) ?? throw new Exception("Invalid image format.");
+            Config.Logo = image;
+        } catch (Exception e) {
+            ErrorMessages?.Add(e.Message);
+        }
     }
 
     [RelayCommand]
@@ -44,6 +67,8 @@ public partial class SettingsViewModel : ViewModelBase {
 
             fileStream.CopyTo(memoryStream);
             Config.Logo = memoryStream.ToArray();
+
+            LogoUrl = string.Empty;
         } catch (Exception e) {
             ErrorMessages?.Add(e.Message);
         }
@@ -104,7 +129,12 @@ public partial class SettingsViewModel : ViewModelBase {
         ErrorMessages?.Clear();
 
         try {
-            // TODO: Implement
+            var printerService = (
+                App.Current?.Services?.GetService<IPrintService>()
+            ) ?? throw new NullReferenceException("Missing PrinterService instance.");
+
+            var doc = DocumentBuilder.Build(Config).GenerateXps();
+            printerService.PrintXps(doc);
         } catch (Exception e) {
             ErrorMessages?.Add(e.Message);
         }
