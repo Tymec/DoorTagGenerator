@@ -133,6 +133,14 @@ public partial class SettingsViewModel : ViewModelBase {
                 App.Current?.Services?.GetService<IPrintService>()
             ) ?? throw new NullReferenceException("Missing PrinterService instance.");
 
+            // await Task.Run(() => {
+            //     var doc = DocumentBuilder.Build(Config);
+            //     var tempFile = Path.GetTempFileName();
+            //     doc.GenerateXps(tempFile);
+
+            //     return printerService.PrintXps(tempFile);
+            // }, token);
+
             var doc = DocumentBuilder.Build(Config);
             var tempFile = Path.GetTempFileName();
             doc.GenerateXps(tempFile);

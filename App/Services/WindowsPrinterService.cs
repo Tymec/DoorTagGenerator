@@ -4,6 +4,7 @@ using System.Windows.Documents;
 using System.Windows.Controls;
 using System.Windows.Xps.Packaging;
 using System.Windows;
+using System.Printing;
 
 namespace App.Services;
 
@@ -13,9 +14,15 @@ public class WindowsPrinterService : IPrintService {
     }
 
     public bool PrintXps(string path) {
+        PrintTicket ticket = new() {
+            PageOrientation = PageOrientation.Landscape,
+            PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4),
+        };
+
         PrintDialog dialog = new() {
             PageRangeSelection = PageRangeSelection.AllPages,
             UserPageRangeEnabled = true,
+            PrintTicket = ticket,
         };
 
         bool? print = dialog.ShowDialog();
@@ -36,21 +43,4 @@ public class WindowsPrinterService : IPrintService {
             return false;
         }
     }
-
-    // private static FixedDocumentSequence CreateFixedDocumentSequence(byte[] data) {
-    //     XpsDocument? doc = null;
-
-    //     using MemoryStream stream = new(data);
-    //     using Package package = Package.Open(stream);
-
-    //     Uri uri = new("memorystream://document.xps");
-    //     try {
-    //         PackageStore.AddPackage(uri, package);
-    //         doc = new(package, CompressionOption.Maximum, uri.AbsoluteUri);
-    //         return doc.GetFixedDocumentSequence();
-    //     } finally {
-    //         doc?.Close();
-    //         PackageStore.RemovePackage(uri);
-    //     }
-    // }
 }
