@@ -2,8 +2,8 @@ using Avalonia.Controls;
 
 namespace App.Views;
 
-public partial class MainSettingsView : UserControl {
-    public MainSettingsView() {
+public partial class ValueSettingsView : UserControl {
+    public ValueSettingsView() {
         InitializeComponent();
 
         RoomMemberInput.KeyDown += (sender, e) => {

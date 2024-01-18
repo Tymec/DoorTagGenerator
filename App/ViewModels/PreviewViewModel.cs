@@ -13,17 +13,36 @@ public partial class PreviewViewModel : ViewModelBase {
     [ObservableProperty]
     private Bitmap? _documentImage;
 
-    public Configuration Config { get; }
+    public DoorTag Tag { get; }
 
-    public PreviewViewModel(Configuration config) {
-        Config = config;
+    public PreviewViewModel(DoorTag tag) {
+        Tag = tag;
 
-        config.WhenAnyPropertyChanged()
+        // Watch tag properties for changes
+        Tag.WhenAnyPropertyChanged()
             .Throttle(TimeSpan.FromMilliseconds(200))
             .ObserveOn(RxApp.MainThreadScheduler)
             .Subscribe(_ => BuildDocument());
 
-        config.RoomMembers.ToObservableChangeSet()
+        // Watch properties of tag properties for changes
+        Tag.Logo.WhenAnyPropertyChanged()
+            .Throttle(TimeSpan.FromMilliseconds(200))
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(_ => BuildDocument());
+
+        Tag.RoomNumber.WhenAnyPropertyChanged()
+            .Throttle(TimeSpan.FromMilliseconds(200))
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(_ => BuildDocument());
+
+        Tag.RoomMembers.WhenAnyPropertyChanged()
+            .Throttle(TimeSpan.FromMilliseconds(200))
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(_ => BuildDocument());
+
+        // Watch collection
+        Tag.RoomMembers.Members.ToObservableChangeSet()
+            .Throttle(TimeSpan.FromMilliseconds(200))
             .ObserveOn(RxApp.MainThreadScheduler)
             .Subscribe(_ => BuildDocument());
 
@@ -31,7 +50,7 @@ public partial class PreviewViewModel : ViewModelBase {
     }
 
     private void BuildDocument() {
-        var doc = DocumentBuilder.Build(Config);
+        var doc = DocumentBuilder.Build(Tag);
 
         var images = doc.ToBitmap();
         if (images != null && images.Count > 0) {

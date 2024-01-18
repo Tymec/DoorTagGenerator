@@ -7,12 +7,12 @@
              xmlns:controls="using:Avalonia.Themes.Neumorphism.Controls"
              xmlns:icons="using:Material.Icons.Avalonia"
              mc:Ignorable="d"
-             x:Class="App.Views.MainSettingsView"
-             x:DataType="vm:MainSettingsViewModel">
-  <Grid Margin="10" Grid.RowDefinitions="1*,Auto" HorizontalAlignment="Stretch" Width="NaN">
+             x:Class="App.Views.ValueSettingsView"
+             x:DataType="vm:ValueSettingsViewModel">
+  <Grid Margin="10" Grid.RowDefinitions="1*,Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="NaN">
     <StackPanel Grid.Row="0" Orientation="Vertical">
       <!-- Room number -->
-      <TextBox Name="RoomNumberInput" Width="NaN" HorizontalAlignment="Stretch" Watermark="Room number" Margin="0,0,0,15" Text="{Binding Config.RoomNumber}" />
+      <TextBox Name="RoomNumberInput" Width="NaN" HorizontalAlignment="Stretch" Watermark="Room number" Margin="0,0,0,15" Text="{Binding Tag.RoomNumber.Text}" />
       
       <!-- Logo -->
       <Grid Grid.ColumnDefinitions="1*,Auto" Margin="0,0,0,15">
@@ -28,7 +28,7 @@
       <controls:Card Theme="{StaticResource CardInset}" CornerRadius="8" Padding="0,0,0,20" VerticalAlignment="Top" Background="{DynamicResource MaterialDesignLinearGradient1}">
         <StackPanel Orientation="Vertical">
           <ScrollViewer VerticalScrollBarVisibility="Auto" Height="250" Margin="0,0,0,15" Padding="0">
-            <ItemsControl ItemsSource="{Binding Config.RoomMembers}">
+            <ItemsControl ItemsSource="{Binding Tag.RoomMembers.Members}">
               <ItemsControl.Styles>
                 <Style Selector="Grid > Button:pointerover /template/ ContentPresenter">
                   <Setter Property="Foreground" Value="White" />
@@ -40,7 +40,7 @@
                   <Grid ColumnDefinitions="Auto,*,Auto" Margin="15,0,15,0" Background="Transparent">
                     <icons:MaterialIcon Grid.Column="0" Kind="Person" Width="24" Height="24" HorizontalAlignment="Left" Foreground="Gray" />
                     <TextBlock Grid.Column="1" Text="{Binding Name}" Padding="0" VerticalAlignment="Center" Foreground="{DynamicResource MaterialDesignToolForeground}" />
-                    <Button Classes="no-material" Grid.Column="2" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}" HorizontalAlignment="Right" Foreground="Gray" Command="{Binding $parent[ItemsControl].((vm:MainSettingsViewModel)DataContext).RemoveRoomMemberCommand}" CommandParameter="{Binding Name}">
+                    <Button Classes="no-material" Grid.Column="2" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}" HorizontalAlignment="Right" Foreground="Gray" Command="{Binding $parent[ItemsControl].((vm:ValueSettingsViewModel)DataContext).RemoveRoomMemberCommand}" CommandParameter="{Binding Name}">
                       <Button.Content>
                         <icons:MaterialIcon Kind="Delete" Width="24" Height="24" />
                       </Button.Content>
@@ -62,26 +62,5 @@
         </StackPanel>
       </controls:Card>
     </StackPanel>
-
-    <!-- Buttons: Save, Load, Print -->
-    <UniformGrid Grid.Row="1" Rows="1" Margin="10">
-      <controls:FloatingButton Grid.Column="0" HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" ToolTip.Tip="Save">
-        <controls:FloatingButton.Content>
-          <icons:MaterialIcon Kind="FloppyDisc" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
-        </controls:FloatingButton.Content>
-      </controls:FloatingButton>
-
-      <controls:FloatingButton Grid.Column="1" HorizontalAlignment="Center" Command="{Binding LoadFileCommand}" ToolTip.Tip="Load">
-        <controls:FloatingButton.Content>
-          <icons:MaterialIcon Kind="Download" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
-        </controls:FloatingButton.Content>
-      </controls:FloatingButton>
-
-      <controls:FloatingButton Grid.Column="2" HorizontalAlignment="Right" Command="{Binding PrintCommand}" ToolTip.Tip="Print">
-        <controls:FloatingButton.Content>
-          <icons:MaterialIcon Kind="Printer" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
-        </controls:FloatingButton.Content>
-      </controls:FloatingButton>
-    </UniformGrid>
   </Grid>
 </UserControl>

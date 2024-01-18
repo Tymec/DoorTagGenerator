@@ -21,6 +21,7 @@ public partial class ViewModelBase : ObservableObject {
     private void ShowToast() {
         if (ErrorMessages.Count > 0) {
             SnackbarHost.Post(ErrorMessages[0]);
+            Console.WriteLine(ErrorMessages[0]);
         }
     }
 }

@@ -3,9 +3,9 @@ using App.Models;
 namespace App.ViewModels;
 
 public partial class StyleSettingsViewModel : ViewModelBase {
-    public Configuration Config { get; private set; }
+    public DoorTag Tag { get; }
 
-    public StyleSettingsViewModel(Configuration config) {
-        Config = config;
+    public StyleSettingsViewModel(DoorTag tag) {
+        Tag = tag;
     }
 }

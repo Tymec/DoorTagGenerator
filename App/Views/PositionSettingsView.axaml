@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:App.ViewModels"
+             xmlns:models="using:App.Models"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="550"
+             x:Class="App.Views.PositionSettingsView"
+             x:DataType="vm:PositionSettingsViewModel">
+  <Grid Margin="10" Grid.RowDefinitions="1*,Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="NaN">
+    <StackPanel Grid.Row="0" Orientation="Vertical">
+      <!-- Logo position -->
+      <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+      <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
+        <NumericUpDown Name="LogoXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.Logo.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
+        <NumericUpDown Name="LogoYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.Logo.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+      </Grid>
+
+      <!-- Room number position -->
+      <TextBlock Text="Room Number" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+      <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
+        <NumericUpDown Name="RoomNumberXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.RoomNumber.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
+        <NumericUpDown Name="RoomNumberYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.RoomNumber.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+      </Grid>
+
+      <!-- Room members position -->
+      <TextBlock Text="Room Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+      <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
+        <NumericUpDown Name="RoomMembersXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.RoomMembers.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
+        <NumericUpDown Name="RoomMembersYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.RoomMembers.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+      </Grid>
+    </StackPanel>
+  </Grid>
+</UserControl>

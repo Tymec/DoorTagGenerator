@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:App.ViewModels"
+             xmlns:controls="using:Avalonia.Themes.Neumorphism.Controls"
+             xmlns:icons="using:Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="80"
+             x:Class="App.Views.ControlsView"
+             x:DataType="vm:ControlsViewModel">  
+  <!-- TODO: Reset to default button -->
+  <UniformGrid Grid.Row="1" Rows="1" Margin="10" Width="NaN">
+    <controls:FloatingButton Grid.Column="0" HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" ToolTip.Tip="Save">
+      <controls:FloatingButton.Content>
+        <icons:MaterialIcon Kind="FloppyDisc" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
+      </controls:FloatingButton.Content>
+    </controls:FloatingButton>
+
+    <controls:FloatingButton Grid.Column="1" HorizontalAlignment="Center" Command="{Binding LoadFileCommand}" ToolTip.Tip="Load">
+      <controls:FloatingButton.Content>
+        <icons:MaterialIcon Kind="Download" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
+      </controls:FloatingButton.Content>
+    </controls:FloatingButton>
+
+    <controls:FloatingButton Grid.Column="2" HorizontalAlignment="Right" Command="{Binding PrintCommand}" ToolTip.Tip="Print">
+      <controls:FloatingButton.Content>
+        <icons:MaterialIcon Kind="Printer" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
+      </controls:FloatingButton.Content>
+    </controls:FloatingButton>
+  </UniformGrid>
+</UserControl>

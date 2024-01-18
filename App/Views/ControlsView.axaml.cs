@@ -2,8 +2,8 @@ using Avalonia.Controls;
 
 namespace App.Views;
 
-public partial class SettingsView : UserControl {
-    public SettingsView() {
+public partial class ControlsView : UserControl {
+    public ControlsView() {
         InitializeComponent();
     }
 }
