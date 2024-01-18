@@ -1,6 +1,4 @@
 using App.Models;
-using DynamicData.Binding;
-using ReactiveUI;
 
 namespace App.ViewModels;
 
@@ -10,7 +8,7 @@ public class MainWindowViewModel : ViewModelBase {
 
     public MainWindowViewModel() {
         Configuration config = new();
-        Preview = new PreviewViewModel(config);
-        Settings = new SettingsViewModel(config);
+        Preview = new(config);
+        Settings = new(config);
     }
 }

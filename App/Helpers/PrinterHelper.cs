@@ -19,12 +19,15 @@ public static class PrinterHelper {
         PrintTicket ticket = new() {
             PageOrientation = PageOrientation.Landscape,
             PageMediaSize = new PageMediaSize(PageMediaSizeName.NorthAmericaLetter),
+            OutputQuality = OutputQuality.Automatic,
+            PageResolution = new PageResolution(PageQualitativeResolution.High),
+            TrueTypeFontMode = TrueTypeFontMode.RenderAsBitmap,
         };
 
         PrintDialog dialog = new() {
             PageRangeSelection = PageRangeSelection.AllPages,
             UserPageRangeEnabled = true,
-            PrintTicket = ticket,
+            // PrintTicket = ticket,
         };
 
         bool? print = dialog.ShowDialog();

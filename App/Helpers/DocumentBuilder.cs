@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using App.Models;
@@ -14,27 +13,50 @@ public static class DocumentBuilder {
         return Document.Create(container => {
             container.Page(page => {
                 page.Size(PageSizes.Letter.Landscape());
-                page.Margin(2, Unit.Centimetre);
+                page.Margin(1, Unit.Centimetre);
                 page.PageColor(Colors.White);
                 page.DefaultTextStyle(x => x.FontSize(20));
 
                 page.Content()
-                    .PaddingVertical(1, Unit.Centimetre)
-                    .Column(row => {
-                        row.Item()
-                            .BorderBottom(2)
-                            .BorderColor(Colors.Red.Medium)
-                            .Row(col => {
-                                col.RelativeItem().Image(config.Logo).FitArea();
+                    .Column(col => {
+                        col.Item()
+                            .PaddingBottom(1, Unit.Centimetre)
+                            .Row(row => {
+                                // Logo
+                                row.RelativeItem(4)
+                                    // .Border(1, Unit.Millimetre).BorderColor(Colors.Red.Medium)   // DEBUG
+                                    // .Width(8, Unit.Centimetre)
+                                    // .Height(2, Unit.Centimetre)
+                                    // .MaxHeight(2, Unit.Centimetre)
+                                    // .MaxWidth(4, Unit.Centimetre)
+                                    .AspectRatio(1)
+                                    .AlignCenter()
+                                    .Image(config.Logo)
+                                    .FitArea()
+                                    .WithRasterDpi(96);
 
-                                col.RelativeItem().Text(config.RoomNumber).SemiBold().FontSize(36).FontColor(Colors.Blue.Medium);
+                                row.Spacing(1, Unit.Centimetre);
+
+                                // Room Number
+                                row.RelativeItem(6)
+                                    // .Border(1, Unit.Millimetre).BorderColor(Colors.Red.Medium)   // DEBUG
+                                    .AlignLeft().AlignMiddle()
+                                    .Text(config.RoomNumber).SemiBold().FontSize(52).FontColor(Colors.Black);
                             });
 
-                        row.Item()
-                            .Text(string.Join(", ", config.RoomMembers))
-                            .FontSize(18)
-                            .FontColor(Colors.Blue.Medium);
+                        // Room members
+                        foreach (var person in config.RoomMembers) {
+                            col.Item()
+                                .PaddingLeft(1, Unit.Centimetre)
+                                .Shrink()
+                                .ScaleToFit()
+                                .Row(row => {
+                                    // row.Spacing(5);
 
+                                    row.RelativeItem(1)
+                                        .Text(person.Name);
+                                });
+                        }
                     });
             });
         });

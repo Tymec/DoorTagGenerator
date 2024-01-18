@@ -2,12 +2,11 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 
-namespace App.Helpers;
+namespace App;
 
-public static class ImageHelper {
+public static class Utils {
     private static readonly HttpClient httpClient = new();
 
     public static byte[] LoadFromResource(string resourceName) {

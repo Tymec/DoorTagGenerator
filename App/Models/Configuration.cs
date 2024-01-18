@@ -1,19 +1,20 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using QuestPDF.Helpers;
 using System.Collections.ObjectModel;
 
 namespace App.Models;
 
 public partial class Configuration : ObservableObject {
     [ObservableProperty]
-    private byte[] _logo = Placeholders.Image(500, 500);
+    // private byte[] _logo = Placeholders.Image(500, 500);
+    private byte[] _logo = Utils.LoadFromResource("Logo.png");
 
-    private string _roomNumber = "0";
+    private string _roomNumber = "1083";
     public string RoomNumber {
         get => _roomNumber;
         set {
             if (string.IsNullOrEmpty(value)) {
-                SetProperty(ref _roomNumber, "0");
+                // SetProperty(ref _roomNumber, "0");
+                SetProperty(ref _roomNumber, "");
                 return;
             }
 
