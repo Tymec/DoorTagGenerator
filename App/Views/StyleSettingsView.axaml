@@ -11,9 +11,8 @@
     <StackPanel Grid.Row="0" Orientation="Vertical">
       <!-- Logo styling -->
       <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
-      <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
-        <NumericUpDown Grid.Column="0" Name="LogoWidthInput" Focusable="False" Minimum="64" Maximum="1024" Increment="1" Value="500" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
-        <NumericUpDown Grid.Column="1" Name="LogoHeightInput" Focusable="False" Minimum="64" Maximum="1024" Increment="1" Value="500" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+      <Grid Grid.ColumnDefinitions="1*" Margin="0,0,0,15">
+        <Slider Grid.Column="0" Theme="{StaticResource SliderHorizontal}" Margin="10,0,10,0" Minimum="0.2" Maximum="1.5" HorizontalAlignment="Stretch" Width="NaN" Value="{Binding Tag.Logo.AspectRatio}" />
       </Grid>
 
       <!-- Room number styling -->

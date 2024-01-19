@@ -50,11 +50,16 @@ public partial class PreviewViewModel : ViewModelBase {
     }
 
     private void BuildDocument() {
-        var doc = DocumentBuilder.Build(Tag);
+        ErrorMessages?.Clear();
+        try {
+            var doc = DocumentBuilder.Build(Tag);
 
-        var images = doc.ToBitmap();
-        if (images != null && images.Count > 0) {
-            DocumentImage = images[0];
+            var images = doc.ToBitmap();
+            if (images != null && images.Count > 0) {
+                DocumentImage = images[0];
+            }
+        } catch (Exception e) {
+            ErrorMessages?.Add(e.Message);
         }
     }
 }

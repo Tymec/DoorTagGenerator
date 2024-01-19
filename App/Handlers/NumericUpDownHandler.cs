@@ -15,6 +15,9 @@ public static class NumericUpDownHandler {
         } else if (e.Key == Key.Down) {
             input.Value -= increment;
         }
+
+        if (input.Value < input.Minimum) input.Value = input.Minimum;
+        if (input.Value > input.Maximum) input.Value = input.Maximum;
     }
 
     public static void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e) {
@@ -24,5 +27,8 @@ public static class NumericUpDownHandler {
 
         var increment = input.Increment;
         input.Value += increment * (int)e.Delta.Y;
+
+        if (input.Value < input.Minimum) input.Value = input.Minimum;
+        if (input.Value > input.Maximum) input.Value = input.Maximum;
     }
 }

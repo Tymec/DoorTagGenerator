@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using App.Models;
@@ -9,6 +10,8 @@ using QuestPDF.Infrastructure;
 namespace App.Helpers;
 
 public static class DocumentBuilder {
+    public static int DPI = 96;
+
     public static Document Build(DoorTag tag) {
         return Document.Create(container => {
             container.Page(page => {
@@ -25,15 +28,11 @@ public static class DocumentBuilder {
                                 // Logo
                                 row.RelativeItem(4)
                                     // .Border(1, Unit.Millimetre).BorderColor(Colors.Red.Medium)   // DEBUG
-                                    // .Width(8, Unit.Centimetre)
-                                    // .Height(2, Unit.Centimetre)
-                                    // .MaxHeight(2, Unit.Centimetre)
-                                    // .MaxWidth(4, Unit.Centimetre)
-                                    .AspectRatio(1).AlignCenter()
+                                    .AspectRatio(1 / tag.Logo.AspectRatio).AlignCenter()
                                     .TranslateX(tag.Logo.XOffset).TranslateY(tag.Logo.YOffset)
                                     .Image(tag.Logo.Data)
                                     .FitArea()
-                                    .WithRasterDpi(96);
+                                    .WithRasterDpi(DPI);
 
                                 row.Spacing(1, Unit.Centimetre);
 
@@ -65,9 +64,9 @@ public static class DocumentBuilder {
         });
     }
 
-    public static List<Bitmap> ToBitmap(this Document doc, int dpi = 96) {
+    public static List<Bitmap> ToBitmap(this Document doc) {
         ImageGenerationSettings opts = new() {
-            RasterDpi = dpi
+            RasterDpi = DPI
         };
         IEnumerable<byte[]> images = doc.GenerateImages(opts);
 

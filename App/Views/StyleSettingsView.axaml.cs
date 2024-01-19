@@ -8,7 +8,6 @@ public partial class StyleSettingsView : UserControl {
         InitializeComponent();
 
         foreach (var input in new[] {
-            LogoWidthInput, LogoHeightInput,
             RoomMembersSizeInput
         }) {
             input.KeyDown += NumericUpDownHandler.OnKeyDown;

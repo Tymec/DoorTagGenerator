@@ -105,7 +105,7 @@ public partial class ControlsViewModel : ViewModelBase {
             if (file is null) return;
 
             await using var writeStream = await file.OpenWriteAsync();
-            var doc = DocumentBuilder.Build(Config);
+            var doc = DocumentBuilder.Build(Tag) ?? throw new Exception("Failed to build document.");
             doc.GeneratePdf(writeStream);
 #endif
         } catch (Exception e) {
