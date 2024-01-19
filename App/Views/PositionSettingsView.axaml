@@ -4,11 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:App.ViewModels"
              xmlns:models="using:App.Models"
+             xmlns:icons="using:Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="550"
              x:Class="App.Views.PositionSettingsView"
              x:DataType="vm:PositionSettingsViewModel">
   <Grid Margin="10" Grid.RowDefinitions="1*,Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="NaN">
     <StackPanel Grid.Row="0" Orientation="Vertical">
+      <!-- Logo position -->
+      <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+      <Grid Grid.ColumnDefinitions="Auto,1*,Auto" Margin="0,0,0,5">
+        <Button Grid.Column="0" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}">
+          <Button.Content>
+            <icons:MaterialIcon Kind="Minus" Width="24" Height="24" />
+          </Button.Content>
+        </Button>
+        <TextBox Grid.Column="1" Text="{Binding Tag.Logo.XOffset}" Width="NaN" Margin="10,0,10,0" HorizontalAlignment="Stretch" Theme="{StaticResource TextBoxHeader}">
+          <TextBox.InnerLeftContent>
+            <Border Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}">
+              <icons:MaterialIcon Kind="AlphaX" Width="24" Height="24" />
+            </Border>
+          </TextBox.InnerLeftContent>
+        </TextBox>
+        <Button Grid.Column="2" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}">
+          <Button.Content>
+            <icons:MaterialIcon Kind="Plus" Width="24" Height="24" />
+          </Button.Content>
+        </Button>
+      </Grid>
+
       <!-- Logo position -->
       <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
       <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">

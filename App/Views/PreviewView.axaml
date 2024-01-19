@@ -7,7 +7,6 @@
              x:Class="App.Views.PreviewView"
              x:DataType="vm:PreviewViewModel">  
   <Grid>
-    <!-- <Rectangle Fill="Red" /> -->
     <Image Source="{Binding DocumentImage}" Stretch="Uniform" />
   </Grid>
 </UserControl>

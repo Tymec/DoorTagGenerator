@@ -5,6 +5,7 @@ namespace App.Models;
 public partial class DoorTag : ObservableObject {
     [ObservableProperty]
     private Logo _logo = new() { Data = Utils.LoadFromResource("Logo.png") };
+    // private Logo _logo = new();
 
     [ObservableProperty]
     private RoomNumber _roomNumber = new() { Text = "1083" };

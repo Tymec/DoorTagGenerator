@@ -30,8 +30,7 @@ public static class DocumentBuilder {
                                     // .MaxHeight(2, Unit.Centimetre)
                                     // .MaxWidth(4, Unit.Centimetre)
                                     .AspectRatio(1).AlignCenter()
-                                    .TranslateX(tag.Logo.XOffset)
-                                    .TranslateY(tag.Logo.YOffset)
+                                    .TranslateX(tag.Logo.XOffset).TranslateY(tag.Logo.YOffset)
                                     .Image(tag.Logo.Data)
                                     .FitArea()
                                     .WithRasterDpi(96);
@@ -42,8 +41,7 @@ public static class DocumentBuilder {
                                 row.RelativeItem(6)
                                     // .Border(1, Unit.Millimetre).BorderColor(Colors.Red.Medium)   // DEBUG
                                     .AlignLeft().AlignMiddle()
-                                    .TranslateX(tag.RoomNumber.XOffset)
-                                    .TranslateY(tag.RoomNumber.YOffset)
+                                    .TranslateX(tag.RoomNumber.XOffset).TranslateY(tag.RoomNumber.YOffset)
                                     .Text(tag.RoomNumber.Text)
                                     .SemiBold().FontSize(tag.RoomNumber.Size)
                                     .FontColor(GetColor(tag.RoomNumber.Color));
@@ -53,8 +51,7 @@ public static class DocumentBuilder {
                         foreach (var member in tag.RoomMembers.Members) {
                             col.Item()
                                 .PaddingLeft(1, Unit.Centimetre)
-                                .TranslateX(tag.RoomMembers.XOffset)
-                                .TranslateY(tag.RoomMembers.YOffset)
+                                .TranslateX(tag.RoomMembers.XOffset).TranslateY(tag.RoomMembers.YOffset)
                                 .Row(row => {
                                     // row.Spacing(5);
                                     row.RelativeItem(1)
