@@ -8,50 +8,48 @@
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="550"
              x:Class="App.Views.PositionSettingsView"
              x:DataType="vm:PositionSettingsViewModel">
-  <Grid Margin="10" Grid.RowDefinitions="1*,Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="NaN">
-    <StackPanel Grid.Row="0" Orientation="Vertical">
-      <!-- Logo position -->
-      <!-- <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
-      <Grid Grid.ColumnDefinitions="Auto,1*,Auto" Margin="0,0,0,5">
-        <Button Grid.Column="0" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}">
-          <Button.Content>
-            <icons:MaterialIcon Kind="Minus" Width="24" Height="24" />
-          </Button.Content>
-        </Button>
-        <TextBox Grid.Column="1" Text="{Binding Tag.Logo.XOffset}" Width="NaN" Margin="10,0,10,0" HorizontalAlignment="Stretch" Theme="{StaticResource TextBoxHeader}">
-          <TextBox.InnerLeftContent>
-            <Border Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}">
-              <icons:MaterialIcon Kind="AlphaX" Width="24" Height="24" />
-            </Border>
-          </TextBox.InnerLeftContent>
-        </TextBox>
-        <Button Grid.Column="2" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}">
-          <Button.Content>
-            <icons:MaterialIcon Kind="Plus" Width="24" Height="24" />
-          </Button.Content>
-        </Button>
-      </Grid> -->
+  <StackPanel Grid.Row="0" Orientation="Vertical">
+    <!-- Logo position -->
+    <!-- <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+    <Grid Grid.ColumnDefinitions="Auto,1*,Auto" Margin="0,0,0,5">
+      <Button Grid.Column="0" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}">
+        <Button.Content>
+          <icons:MaterialIcon Kind="Minus" Width="24" Height="24" />
+        </Button.Content>
+      </Button>
+      <TextBox Grid.Column="1" Text="{Binding Tag.Logo.XOffset}" Width="NaN" Margin="10,0,10,0" HorizontalAlignment="Stretch" Theme="{StaticResource TextBoxHeader}">
+        <TextBox.InnerLeftContent>
+          <Border Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}">
+            <icons:MaterialIcon Kind="AlphaX" Width="24" Height="24" />
+          </Border>
+        </TextBox.InnerLeftContent>
+      </TextBox>
+      <Button Grid.Column="2" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}">
+        <Button.Content>
+          <icons:MaterialIcon Kind="Plus" Width="24" Height="24" />
+        </Button.Content>
+      </Button>
+    </Grid> -->
 
-      <!-- Logo position -->
-      <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
-      <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
-        <NumericUpDown Name="LogoXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.Logo.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
-        <NumericUpDown Name="LogoYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.Logo.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
-      </Grid>
+    <!-- Logo position -->
+    <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+    <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
+      <NumericUpDown Name="LogoXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.Logo.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
+      <NumericUpDown Name="LogoYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.Logo.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+    </Grid>
 
-      <!-- Room number position -->
-      <TextBlock Text="Room Number" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
-      <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
-        <NumericUpDown Name="RoomNumberXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.RoomNumber.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
-        <NumericUpDown Name="RoomNumberYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.RoomNumber.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
-      </Grid>
+    <!-- Room number position -->
+    <TextBlock Text="Room Number" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+    <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
+      <NumericUpDown Name="RoomNumberXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.RoomNumber.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
+      <NumericUpDown Name="RoomNumberYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.RoomNumber.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+    </Grid>
 
-      <!-- Room members position -->
-      <TextBlock Text="Room Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
-      <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
-        <NumericUpDown Name="RoomMembersXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.RoomMembers.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
-        <NumericUpDown Name="RoomMembersYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.RoomMembers.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
-      </Grid>
-    </StackPanel>
-  </Grid>
+    <!-- Room members position -->
+    <TextBlock Text="Room Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+    <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
+      <NumericUpDown Name="RoomMembersXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.RoomMembers.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
+      <NumericUpDown Name="RoomMembersYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.RoomMembers.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+    </Grid>
+  </StackPanel>
 </UserControl>

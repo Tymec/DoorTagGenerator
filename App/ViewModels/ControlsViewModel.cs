@@ -78,7 +78,7 @@ public partial class ControlsViewModel : ViewModelBase {
         try {
 #if WINDOWS
             string path = await Task.Run(() => {
-                var doc = DocumentBuilder.Build(Tag);
+                var doc = Tag.ToDocument();
 
                 string tempFile = Path.GetTempFileName() + ".xps";
                 doc.GenerateXps(tempFile);
@@ -105,7 +105,7 @@ public partial class ControlsViewModel : ViewModelBase {
             if (file is null) return;
 
             await using var writeStream = await file.OpenWriteAsync();
-            var doc = DocumentBuilder.Build(Tag) ?? throw new Exception("Failed to build document.");
+            var doc = Tag.ToDocument() ?? throw new Exception("Failed to build document.");
             doc.GeneratePdf(writeStream);
 #endif
         } catch (Exception e) {

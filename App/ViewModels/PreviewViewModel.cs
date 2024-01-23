@@ -52,7 +52,7 @@ public partial class PreviewViewModel : ViewModelBase {
     private void BuildDocument() {
         ErrorMessages?.Clear();
         try {
-            var doc = DocumentBuilder.Build(Tag);
+            var doc = Tag.ToDocument();
 
             var images = doc.ToBitmap();
             if (images != null && images.Count > 0) {

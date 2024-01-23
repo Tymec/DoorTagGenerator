@@ -7,5 +7,6 @@
   <Application.Styles>
     <theme:NeumorphismTheme BaseTheme="Dark" PrimaryColor="Purple" SecondaryColor="Lime" />
     <icons:MaterialIconStyles/>
+    <StyleInclude Source="/Styles.axaml"/>
   </Application.Styles>
 </Application>

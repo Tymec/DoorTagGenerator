@@ -8,24 +8,40 @@
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="80"
              x:Class="App.Views.ControlsView"
              x:DataType="vm:ControlsViewModel">  
-  <!-- TODO: Reset to default button -->
-  <UniformGrid Grid.Row="1" Rows="1" Margin="10" Width="NaN">
-    <controls:FloatingButton Grid.Column="0" HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" ToolTip.Tip="Save">
+  <!-- Reset to default -->
+  <Grid Margin="30">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <!-- <controls:FloatingButton Grid.ColumnSpan="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Width="NaN" IsExtended="True" Foreground="{DynamicResource MaterialDesignForeground}">
+      <controls:FloatingButton.Content>
+        <TextBlock Text="Reset to defaults" />
+      </controls:FloatingButton.Content>
+    </controls:FloatingButton> -->
+
+    <controls:FloatingButton Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" ToolTip.Tip="Save">
       <controls:FloatingButton.Content>
         <icons:MaterialIcon Kind="FloppyDisc" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
       </controls:FloatingButton.Content>
     </controls:FloatingButton>
 
-    <controls:FloatingButton Grid.Column="1" HorizontalAlignment="Center" Command="{Binding LoadFileCommand}" ToolTip.Tip="Load">
+    <controls:FloatingButton Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Command="{Binding LoadFileCommand}" ToolTip.Tip="Load">
       <controls:FloatingButton.Content>
         <icons:MaterialIcon Kind="Download" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
       </controls:FloatingButton.Content>
     </controls:FloatingButton>
 
-    <controls:FloatingButton Grid.Column="2" HorizontalAlignment="Right" Command="{Binding PrintCommand}" ToolTip.Tip="Print">
+    <controls:FloatingButton Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Command="{Binding PrintCommand}" ToolTip.Tip="Print">
       <controls:FloatingButton.Content>
         <icons:MaterialIcon Kind="Printer" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
       </controls:FloatingButton.Content>
     </controls:FloatingButton>
-  </UniformGrid>
+  </Grid>
 </UserControl>

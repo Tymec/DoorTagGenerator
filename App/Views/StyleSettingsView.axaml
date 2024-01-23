@@ -7,28 +7,26 @@
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="550"
              x:Class="App.Views.StyleSettingsView"
              x:DataType="vm:StyleSettingsViewModel">
-  <Grid Margin="10" Grid.RowDefinitions="1*,Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="NaN">
-    <StackPanel Grid.Row="0" Orientation="Vertical">
-      <!-- Logo styling -->
-      <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
-      <Grid Grid.ColumnDefinitions="1*" Margin="0,0,0,15">
-        <Slider Grid.Column="0" Theme="{StaticResource SliderHorizontal}" Margin="10,0,10,0" Minimum="0.2" Maximum="1.5" HorizontalAlignment="Stretch" Width="NaN" Value="{Binding Tag.Logo.AspectRatio}" />
-      </Grid>
+  <StackPanel Orientation="Vertical">
+    <!-- Logo styling -->
+    <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+    <Grid Grid.ColumnDefinitions="1*" Margin="0,0,0,15">
+      <Slider Grid.Column="0" Theme="{StaticResource SliderHorizontal}" Margin="10,0,10,0" Minimum="0.2" Maximum="1.5" HorizontalAlignment="Stretch" Width="NaN" Value="{Binding Tag.Logo.AspectRatio}" />
+    </Grid>
 
-      <!-- Room number styling -->
-      <TextBlock Text="Room Number" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
-      <Grid Grid.ColumnDefinitions="1*,2*" Margin="0,0,0,15">
-        <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Room number color" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding Tag.RoomNumber.Color}" />
-        <!-- <NumericUpDown Grid.Column="1" Minimum="1" Maximum="100" Increment="1" Value="{Binding Tag.RoomNumber.Size}" /> -->
-        <Slider Grid.Column="1" Theme="{StaticResource SliderHorizontal}" Minimum="1" Maximum="100" HorizontalAlignment="Stretch" Width="NaN" Value="{Binding Tag.RoomNumber.Size}" />
-      </Grid>
+    <!-- Room number styling -->
+    <TextBlock Text="Room Number" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+    <Grid Grid.ColumnDefinitions="1*,2*" Margin="0,0,0,15">
+      <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Room number color" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding Tag.RoomNumber.Color}" />
+      <!-- <NumericUpDown Grid.Column="1" Minimum="1" Maximum="100" Increment="1" Value="{Binding Tag.RoomNumber.Size}" /> -->
+      <Slider Grid.Column="1" Theme="{StaticResource SliderHorizontal}" Minimum="1" Maximum="100" HorizontalAlignment="Stretch" Width="NaN" Value="{Binding Tag.RoomNumber.Size}" />
+    </Grid>
 
-      <!-- Room members styling -->
-      <TextBlock Text="Room Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
-      <Grid Grid.ColumnDefinitions="1*,Auto" Margin="0,0,0,15">
-        <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Room members color" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding Tag.RoomMembers.Color}" />
-        <NumericUpDown Grid.Column="1" Name="RoomMembersSizeInput" Focusable="False" Minimum="1" Maximum="100" Increment="1" Value="{Binding Tag.RoomMembers.Size}" />
-      </Grid>
-    </StackPanel>
-  </Grid>
+    <!-- Room members styling -->
+    <TextBlock Text="Room Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+    <Grid Grid.ColumnDefinitions="1*,Auto" Margin="0,0,0,15">
+      <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Room members color" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding Tag.RoomMembers.Color}" />
+      <NumericUpDown Grid.Column="1" Name="RoomMembersSizeInput" Focusable="False" Minimum="1" Maximum="100" Increment="1" Value="{Binding Tag.RoomMembers.Size}" />
+    </Grid>
+  </StackPanel>
 </UserControl>
