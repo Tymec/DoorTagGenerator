@@ -9,14 +9,14 @@
              mc:Ignorable="d"
              x:Class="App.Views.ValueSettingsView"
              x:DataType="vm:ValueSettingsViewModel">
-  <StackPanel Orientation="Vertical">
+  <StackPanel Orientation="Vertical" Margin="10">
     <!-- Room number -->
     <TextBox Name="RoomNumberInput" Width="NaN" HorizontalAlignment="Stretch" Watermark="Room number" Margin="0,0,0,15" Text="{Binding Tag.RoomNumber.Text}" />
     
     <!-- Logo -->
     <Grid Grid.ColumnDefinitions="1*,Auto" Margin="0,0,0,15">
       <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Logo URL" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding LogoUrl}" />
-      <Button Grid.Column="1" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}" Command="{Binding LoadLogoFileCommand}">
+      <Button Grid.Column="1" CornerRadius="10" Height="{Binding $parent[TextBox].Height}" Width="{Binding $self.Bounds.Height}" Command="{Binding LoadLogoFileCommand}" Padding="8">
         <Button.Content>
           <icons:MaterialIcon Kind="FileImage" Width="24" Height="24" />
         </Button.Content>

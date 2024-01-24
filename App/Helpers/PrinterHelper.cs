@@ -10,7 +10,7 @@ using System.Printing;
 namespace App.Helpers;
 
 public static class PrinterHelper {
-    public static bool Print(string xpsPath) {
+    public static bool? Print(string xpsPath) {
         if (!OperatingSystem.IsWindows()) {
             throw new PlatformNotSupportedException("Printing is only supported on Windows.");
         }
@@ -27,12 +27,12 @@ public static class PrinterHelper {
         PrintDialog dialog = new() {
             PageRangeSelection = PageRangeSelection.AllPages,
             UserPageRangeEnabled = true,
-            // PrintTicket = ticket,
+            PrintTicket = ticket,
         };
 
         bool? print = dialog.ShowDialog();
         if (print == null || print == false) {
-            return false;
+            return null;
         }
 
         XpsDocument xpsDocument = new(xpsPath, FileAccess.Read);

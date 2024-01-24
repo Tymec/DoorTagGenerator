@@ -50,7 +50,7 @@ public partial class PreviewViewModel : ViewModelBase {
     }
 
     private void BuildDocument() {
-        ErrorMessages?.Clear();
+        Messages?.Clear();
         try {
             var doc = Tag.ToDocument();
 
@@ -59,7 +59,7 @@ public partial class PreviewViewModel : ViewModelBase {
                 DocumentImage = images[0];
             }
         } catch (Exception e) {
-            ErrorMessages?.Add(e.Message);
+            Messages?.Add(e.Message);
         }
     }
 }

@@ -3,10 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:App.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1056" d:DesignHeight="816"
              x:Class="App.Views.PreviewView"
              x:DataType="vm:PreviewViewModel">  
-  <Grid>
-    <Image Source="{Binding DocumentImage}" Stretch="Uniform" />
-  </Grid>
+  <Image Source="{Binding DocumentImage}" Stretch="Uniform" />
 </UserControl>

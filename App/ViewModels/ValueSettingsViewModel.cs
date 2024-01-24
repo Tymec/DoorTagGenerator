@@ -37,19 +37,19 @@ public partial class ValueSettingsViewModel : ViewModelBase {
     private async void LoadLogoUrl(string url) {
         Console.WriteLine($"Loading logo from {url}");
 
-        ErrorMessages?.Clear();
+        Messages?.Clear();
 
         try {
             var image = await Utils.LoadFromUrl(new Uri(url)) ?? throw new Exception("Invalid image format.");
             Tag.Logo.Data = image;
         } catch (Exception e) {
-            ErrorMessages?.Add(e.Message);
+            Messages?.Add(e.Message);
         }
     }
 
     [RelayCommand(CanExecute = nameof(CanAddRoomMember))]
     private async Task AddRoomMember(string name, CancellationToken token) {
-        ErrorMessages?.Clear();
+        Messages?.Clear();
 
         try {
             await Task.Run(() => {
@@ -57,7 +57,7 @@ public partial class ValueSettingsViewModel : ViewModelBase {
                 RoomMember = string.Empty;
             }, token);
         } catch (Exception e) {
-            ErrorMessages?.Add(e.Message);
+            Messages?.Add(e.Message);
         }
     }
 
@@ -65,7 +65,7 @@ public partial class ValueSettingsViewModel : ViewModelBase {
 
     [RelayCommand(CanExecute = nameof(CanRemoveRoomMember))]
     private async Task RemoveRoomMember(string name, CancellationToken token) {
-        ErrorMessages?.Clear();
+        Messages?.Clear();
 
         try {
             await Task.Run(() => {
@@ -75,7 +75,7 @@ public partial class ValueSettingsViewModel : ViewModelBase {
                 }
             }, token);
         } catch (Exception e) {
-            ErrorMessages?.Add(e.Message);
+            Messages?.Add(e.Message);
         }
     }
 
@@ -83,7 +83,7 @@ public partial class ValueSettingsViewModel : ViewModelBase {
 
     [RelayCommand]
     private async Task LoadLogoFile(CancellationToken token) {
-        ErrorMessages?.Clear();
+        Messages?.Clear();
 
         try {
             var filesService = (
@@ -103,8 +103,10 @@ public partial class ValueSettingsViewModel : ViewModelBase {
             Tag.Logo.Data = memoryStream.ToArray();
 
             LogoUrl = string.Empty;
+
+            Messages?.Add("Logo image loaded.");
         } catch (Exception e) {
-            ErrorMessages?.Add(e.Message);
+            Messages?.Add(e.Message);
         }
     }
 }

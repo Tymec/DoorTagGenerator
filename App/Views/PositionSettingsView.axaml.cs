@@ -1,6 +1,5 @@
 using App.Handlers;
 using Avalonia.Controls;
-using Avalonia.Input;
 
 namespace App.Views;
 

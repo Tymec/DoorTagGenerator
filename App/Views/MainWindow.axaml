@@ -7,97 +7,88 @@
         xmlns:controls="using:Avalonia.Themes.Neumorphism.Controls"
         xmlns:icons="using:Material.Icons.Avalonia"
         xmlns:assist="using:Avalonia.Themes.Neumorphism.Assist"
-        mc:Ignorable="d" d:DesignWidth="1162" d:DesignHeight="620"
-        Width="1375" Height="732"
-        WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
+        xmlns:dialog="using:DialogHostAvalonia"
+        mc:Ignorable="d" d:DesignWidth="1611" d:DesignHeight="856"
+        Width="1442" Height="767"
         Title="App"
         x:Class="App.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel">
-  <controls:SnackbarHost HostName="Root"
-                         SnackbarHorizontalAlignment="Center"
-                         SnackbarVerticalAlignment="Bottom"
-                         assist:SnackbarHostAssist.SnackbarHeight="50">
-    <Grid ShowGridLines="True">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="17*" />
-        <ColumnDefinition Width="8*" />
-      </Grid.ColumnDefinitions>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="*" />
-        <RowDefinition Height="Auto" />
-      </Grid.RowDefinitions>
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
 
-      <!-- Color theme toggle -->
-      <ToggleButton ZIndex="1" Name="ThemeToggle" IsChecked="False" ToolTip.Tip="Theme"
-                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"
-                    Width="NaN" Height="NaN" CornerRadius="50" Padding="8"
-                    assist:ToggleButtonAssist.UncheckedBackground="Transparent" 
-                    assist:ToggleButtonAssist.UncheckedForeground="DarkGray"
-                    assist:ToggleButtonAssist.CheckedBackground="{DynamicResource PrimaryHueLightBrush}"
-                    assist:ToggleButtonAssist.CheckedForeground="White"
-                    Command="{Binding SwitchThemeCommand}"
-                    CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}">
-        <ToggleButton.Styles>
-          <Style Selector="ToggleButton:not(:checked) icons|MaterialIcon#ThemeToggleIcon">
-            <Setter Property="Kind" Value="WhiteBalanceSunny" />
-          </Style>
-          <Style Selector="ToggleButton:checked icons|MaterialIcon#ThemeToggleIcon">
-            <Setter Property="Kind" Value="WeatherNight" />
-          </Style>
-        </ToggleButton.Styles>
-        <icons:MaterialIcon Name="ThemeToggleIcon" Width="24" Height="24" />
-      </ToggleButton>
+  <dialog:DialogHost Identifier="MainDialogHost" Theme="{DynamicResource DialogHostTheme}">
+    <controls:SnackbarHost HostName="Root"
+                           SnackbarHorizontalAlignment="Center"
+                           SnackbarVerticalAlignment="Bottom"
+                           assist:SnackbarHostAssist.SnackbarHeight="50">
+      <Grid ShowGridLines="True" Grid.ColumnDefinitions="17*,8*" Grid.RowDefinitions="*,Auto">
+        <!-- Document preview -->
+        <controls:Card Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Padding="0" Margin="10" CornerRadius="15" Theme="{StaticResource CardOutset}">
+          <views:PreviewView DataContext="{Binding Preview}" />
+        </controls:Card>
 
-      <!-- Document preview -->
-      <controls:Card Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                     Theme="{StaticResource CardOutset}"
-                     Padding="0" Margin="10" CornerRadius="15">
-        <views:PreviewView DataContext="{Binding Preview}" />
-      </controls:Card>
+        <!-- Settings tabs -->
+        <TabControl Grid.Row="0" Grid.Column="1" TabStripPlacement="Top"
+                    HorizontalAlignment="Stretch" Width="NaN" Height="NaN" Padding="0"
+                    Margin="10" Theme="{StaticResource ExtensibleTabs}">
+          <TabControl.Resources>
+            <ControlTheme x:Key="ExtensibleTabs" TargetType="TabControl" BasedOn="{StaticResource {x:Type TabControl}}">
+              <Style Selector="^[TabStripPlacement=Top] /template/ DockPanel#PART_TabControlDockPanel">
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+              </Style>
+            </ControlTheme>
+          </TabControl.Resources>
 
-      <TabControl Grid.Row="0" Grid.Column="1" TabStripPlacement="Top" Classes="Bordered" Padding="0" Height="NaN" Margin="10">
-        <TabControl.Items>
-          <TabItem Classes="Button">
-            <TabItem.Header>
-              <StackPanel Orientation="Horizontal">
-                <icons:MaterialIcon Kind="FormatText" Margin="0" Width="24" Height="24" Foreground="Gray" VerticalAlignment="Center" />
-                <TextBlock Margin="5,0,5,0" Text="Values" VerticalAlignment="Center" />
-              </StackPanel>
-            </TabItem.Header>
-            <TabItem.Content>
-              <views:ValueSettingsView DataContext="{Binding ValueSettings}" />
-            </TabItem.Content>
-          </TabItem>
-          
-          <TabItem Classes="Button">
-            <TabItem.Header>
-              <StackPanel Orientation="Horizontal">
-                <icons:MaterialIcon Kind="Brush" Margin="0" Width="24" Height="24" Foreground="Gray" VerticalAlignment="Center" />
-                <TextBlock Margin="5,0,5,0" Text="Style" VerticalAlignment="Center" />
-              </StackPanel>
-            </TabItem.Header>
-            <TabItem.Content>
-              <views:StyleSettingsView DataContext="{Binding StyleSettings}" />
-            </TabItem.Content>
-          </TabItem>
+          <TabControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <UniformGrid Rows="1" HorizontalAlignment="Stretch" />
+            </ItemsPanelTemplate>
+          </TabControl.ItemsPanel>
 
-          <TabItem Classes="Button">
-            <TabItem.Header>
-              <StackPanel Orientation="Horizontal">
-                <icons:MaterialIcon Kind="CrosshairsGps" Margin="0" Width="24" Height="24" Foreground="Gray" VerticalAlignment="Center" />
-                <TextBlock Margin="5,0,5,0" Text="Position" VerticalAlignment="Center" />
-              </StackPanel>
-            </TabItem.Header>
-            <TabItem.Content>
-              <views:PositionSettingsView DataContext="{Binding PositionSettings}" />
-            </TabItem.Content>
-          </TabItem>
-        </TabControl.Items>
-      </TabControl>
+          <TabControl.Items>
+            <TabItem Classes="Button">
+              <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                  <icons:MaterialIcon Kind="FormatText" Margin="0" Width="24" Height="24" Foreground="Gray" VerticalAlignment="Center" />
+                  <TextBlock Margin="5,0,5,0" Text="Values" VerticalAlignment="Center" />
+                </StackPanel>
+              </TabItem.Header>
+              <TabItem.Content>
+                <views:ValueSettingsView DataContext="{Binding ValueSettings}" />
+              </TabItem.Content>
+            </TabItem>
+            
+            <TabItem Classes="Button">
+              <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                  <icons:MaterialIcon Kind="Brush" Margin="0" Width="24" Height="24" Foreground="Gray" VerticalAlignment="Center" />
+                  <TextBlock Margin="5,0,5,0" Text="Style" VerticalAlignment="Center" />
+                </StackPanel>
+              </TabItem.Header>
+              <TabItem.Content>
+                <views:StyleSettingsView DataContext="{Binding StyleSettings}" />
+              </TabItem.Content>
+            </TabItem>
 
-      <!-- Control buttons -->
-      <views:ControlsView Grid.Row="1" Grid.Column="1" DataContext="{Binding Controls}" VerticalAlignment="Bottom" />
-    </Grid>
-  </controls:SnackbarHost>
+            <TabItem Classes="Button">
+              <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                  <icons:MaterialIcon Kind="CrosshairsGps" Margin="0" Width="24" Height="24" Foreground="Gray" VerticalAlignment="Center" />
+                  <TextBlock Margin="5,0,5,0" Text="Position" VerticalAlignment="Center" />
+                </StackPanel>
+              </TabItem.Header>
+              <TabItem.Content>
+                <views:PositionSettingsView DataContext="{Binding PositionSettings}" />
+              </TabItem.Content>
+            </TabItem>
+          </TabControl.Items>
+        </TabControl>
+
+        <!-- Control buttons -->
+        <views:ControlsView Grid.Row="1" Grid.Column="1" DataContext="{Binding Controls}" VerticalAlignment="Bottom" />
+      </Grid>
+    </controls:SnackbarHost>
+  </dialog:DialogHost>
 </Window>

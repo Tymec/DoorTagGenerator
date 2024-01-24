@@ -26,6 +26,7 @@ public partial class App : Application {
 
             var services = new ServiceCollection();
             services.AddSingleton(x => new FileService(desktop.MainWindow));
+            services.AddSingleton(x => new DialogService(desktop.MainWindow));
             Services = services.BuildServiceProvider();
         }
 

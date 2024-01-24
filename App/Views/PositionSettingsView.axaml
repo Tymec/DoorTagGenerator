@@ -8,7 +8,7 @@
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="550"
              x:Class="App.Views.PositionSettingsView"
              x:DataType="vm:PositionSettingsViewModel">
-  <StackPanel Grid.Row="0" Orientation="Vertical">
+  <StackPanel Orientation="Vertical" Margin="10">
     <!-- Logo position -->
     <!-- <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
     <Grid Grid.ColumnDefinitions="Auto,1*,Auto" Margin="0,0,0,5">
@@ -34,22 +34,22 @@
     <!-- Logo position -->
     <TextBlock Text="Logo" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
     <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
-      <NumericUpDown Name="LogoXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.Logo.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
-      <NumericUpDown Name="LogoYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.Logo.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+      <NumericUpDown Name="LogoXOffset" Grid.Column="0" Increment="1" Value="{Binding Tag.Logo.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" Theme="{StaticResource NumericUpDown}" />
+      <NumericUpDown Name="LogoYOffset" Grid.Column="1" Increment="1" Value="{Binding Tag.Logo.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
     </Grid>
 
     <!-- Room number position -->
     <TextBlock Text="Room Number" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
     <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
-      <NumericUpDown Name="RoomNumberXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.RoomNumber.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
-      <NumericUpDown Name="RoomNumberYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.RoomNumber.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+      <NumericUpDown Name="RoomNumberXOffset" Grid.Column="0" Increment="1" Value="{Binding Tag.RoomNumber.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
+      <NumericUpDown Name="RoomNumberYOffset" Grid.Column="1" Increment="1" Value="{Binding Tag.RoomNumber.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
     </Grid>
 
     <!-- Room members position -->
     <TextBlock Text="Room Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
     <Grid Grid.ColumnDefinitions="1*,1*" Margin="0,0,0,15">
-      <NumericUpDown Name="RoomMembersXOffset" Grid.Column="0" Focusable="False" Increment="1" Value="{Binding Tag.RoomMembers.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
-      <NumericUpDown Name="RoomMembersYOffset" Grid.Column="1" Focusable="False" Increment="1" Value="{Binding Tag.RoomMembers.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
+      <NumericUpDown Name="RoomMembersXOffset" Grid.Column="0" Increment="1" Value="{Binding Tag.RoomMembers.XOffset}" Width="NaN" Margin="0,0,5,0" HorizontalAlignment="Stretch" />
+      <NumericUpDown Name="RoomMembersYOffset" Grid.Column="1" Increment="1" Value="{Binding Tag.RoomMembers.YOffset}" Width="NaN" Margin="5,0,0,0" HorizontalAlignment="Stretch" />
     </Grid>
   </StackPanel>
 </UserControl>

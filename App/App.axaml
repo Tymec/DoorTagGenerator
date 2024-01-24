@@ -1,12 +1,13 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:theme="using:Avalonia.Themes.Neumorphism"
+			       xmlns:dialog="using:DialogHostAvalonia"
              xmlns:icons="using:Material.Icons.Avalonia"
              x:Class="App.App"
              RequestedThemeVariant="Default">
   <Application.Styles>
     <theme:NeumorphismTheme BaseTheme="Dark" PrimaryColor="Purple" SecondaryColor="Lime" />
+		<dialog:DialogHostStyles />
     <icons:MaterialIconStyles/>
-    <StyleInclude Source="/Styles.axaml"/>
   </Application.Styles>
 </Application>

@@ -10,7 +10,7 @@ using QuestPDF.Infrastructure;
 namespace App.Helpers;
 
 public static class DocumentExtensions {
-    public static int DPI = 96;
+    public static readonly int DPI = 96;
 
     public static Document ToDocument(this DoorTag tag) {
         return Document.Create(container => {

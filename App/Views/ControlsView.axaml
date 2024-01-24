@@ -5,43 +5,76 @@
              xmlns:vm="using:App.ViewModels"
              xmlns:controls="using:Avalonia.Themes.Neumorphism.Controls"
              xmlns:icons="using:Material.Icons.Avalonia"
+             xmlns:assist="using:Avalonia.Themes.Neumorphism.Assist"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="80"
              x:Class="App.Views.ControlsView"
              x:DataType="vm:ControlsViewModel">  
-  <!-- Reset to default -->
-  <Grid Margin="30">
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-
-    <!-- <controls:FloatingButton Grid.ColumnSpan="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Width="NaN" IsExtended="True" Foreground="{DynamicResource MaterialDesignForeground}">
-      <controls:FloatingButton.Content>
-        <TextBlock Text="Reset to defaults" />
-      </controls:FloatingButton.Content>
-    </controls:FloatingButton> -->
-
-    <controls:FloatingButton Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" ToolTip.Tip="Save">
+  <Grid Margin="30" ShowGridLines="True" Grid.ColumnDefinitions="1*,2*,1*" Grid.RowDefinitions="1*,1*">
+    <controls:FloatingButton Grid.Row="0" Grid.Column="0" Margin="0,0,0,10" HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" ToolTip.Tip="Save">
       <controls:FloatingButton.Content>
         <icons:MaterialIcon Kind="FloppyDisc" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
       </controls:FloatingButton.Content>
     </controls:FloatingButton>
 
-    <controls:FloatingButton Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Command="{Binding LoadFileCommand}" ToolTip.Tip="Load">
+    <controls:FloatingButton Grid.Row="0" Grid.Column="1" Margin="0,0,0,10" HorizontalAlignment="Center" Command="{Binding LoadFileCommand}" ToolTip.Tip="Load">
       <controls:FloatingButton.Content>
         <icons:MaterialIcon Kind="Download" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
       </controls:FloatingButton.Content>
     </controls:FloatingButton>
 
-    <controls:FloatingButton Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Command="{Binding PrintCommand}" ToolTip.Tip="Print">
+    <controls:FloatingButton Grid.Row="0" Grid.Column="2" Margin="0,0,0,10" HorizontalAlignment="Right" Command="{Binding PrintCommand}" ToolTip.Tip="Print">
       <controls:FloatingButton.Content>
         <icons:MaterialIcon Kind="Printer" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
       </controls:FloatingButton.Content>
     </controls:FloatingButton>
+
+    <controls:FloatingButton Grid.Row="1" Grid.Column="1" Margin="0,10,0,0" HorizontalAlignment="Center"
+                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             IsExtended="True" Foreground="{DynamicResource MaterialDesignForeground}"
+                             Command="{Binding ResetToDefaultsCommand}">
+      <controls:FloatingButton.Content>
+        <TextBlock Text="Reset to defaults" />
+      </controls:FloatingButton.Content>
+    </controls:FloatingButton>
+
+    <ToggleButton Grid.Row="1" Grid.Column="2" Margin="0,10,0,0" Name="ThemeToggle" IsChecked="False" ToolTip.Tip="Theme"
+                  HorizontalAlignment="Right" VerticalAlignment="Top"
+                  Width="NaN" Height="NaN" CornerRadius="50" Padding="12"
+                  Command="{Binding SwitchThemeCommand}"
+                  CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}">
+      <ToggleButton.Styles>
+        <!-- Unchecked -->
+        <Style Selector="ToggleButton:not(:checked) icons|MaterialIcon#ThemeToggleIcon">
+          <Setter Property="Kind" Value="WhiteBalanceSunny" />
+          <Setter Property="Background" Value="Transparent" />
+          <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightBrush}" />
+        </Style>
+        <!-- Checked -->
+        <Style Selector="ToggleButton:checked icons|MaterialIcon#ThemeToggleIcon">
+          <Setter Property="Kind" Value="WeatherNight" />
+          <Setter Property="Background" Value="Transparent" />
+          <Setter Property="Foreground" Value="{DynamicResource SecondaryHueLightBrush}" />
+        </Style>
+        <!-- Hover -->
+        <Style Selector="ToggleButton:pointerover icons|MaterialIcon#ThemeToggleIcon">
+          <Setter Property="RenderTransform" Value="scale(1.3)" />
+        </Style>
+        <Style Selector="ToggleButton:not(:checked):pointerover:not(.NoFeedback) /template/ Border#PART_ButtonRootBorder">
+          <Setter Property="Opacity" Value="1.0" />
+        </Style>
+        <Style Selector="ToggleButton:checked:pointerover:not(.NoFeedback) /template/ Border#PART_ButtonRootBorder">
+          <Setter Property="Opacity" Value="1.0" />
+        </Style>
+        <!-- Transition -->
+        <Style Selector="ToggleButton icons|MaterialIcon#ThemeToggleIcon">
+          <Setter Property="Transitions">
+            <Transitions>
+              <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
+            </Transitions>
+          </Setter>
+        </Style>
+      </ToggleButton.Styles>
+      <icons:MaterialIcon Name="ThemeToggleIcon" Width="24" Height="24" />
+    </ToggleButton>
   </Grid>
 </UserControl>
