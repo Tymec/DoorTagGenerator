@@ -22,7 +22,7 @@
                            SnackbarHorizontalAlignment="Center"
                            SnackbarVerticalAlignment="Bottom"
                            assist:SnackbarHostAssist.SnackbarHeight="50">
-      <Grid ShowGridLines="True" Grid.ColumnDefinitions="17*,8*" Grid.RowDefinitions="*,Auto">
+      <Grid Grid.ColumnDefinitions="17*,8*" Grid.RowDefinitions="*,Auto">
         <!-- Document preview -->
         <controls:Card Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Padding="0" Margin="10" CornerRadius="15" Theme="{StaticResource CardOutset}">
           <views:PreviewView DataContext="{Binding Preview}" />
@@ -43,7 +43,7 @@
 
           <TabControl.ItemsPanel>
             <ItemsPanelTemplate>
-              <UniformGrid Rows="1" HorizontalAlignment="Stretch" />
+              <UniformGrid Rows="1" HorizontalAlignment="Stretch" Margin="10,0,10,5" />
             </ItemsPanelTemplate>
           </TabControl.ItemsPanel>
 

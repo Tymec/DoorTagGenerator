@@ -9,7 +9,7 @@
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="80"
              x:Class="App.Views.ControlsView"
              x:DataType="vm:ControlsViewModel">  
-  <Grid Margin="30" ShowGridLines="True" Grid.ColumnDefinitions="1*,2*,1*" Grid.RowDefinitions="1*,1*">
+  <Grid Margin="30" Grid.ColumnDefinitions="1*,2*,1*" Grid.RowDefinitions="1*,1*">
     <controls:FloatingButton Grid.Row="0" Grid.Column="0" Margin="0,0,0,10" HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" ToolTip.Tip="Save">
       <controls:FloatingButton.Content>
         <icons:MaterialIcon Kind="FloppyDisc" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignForeground}" />
