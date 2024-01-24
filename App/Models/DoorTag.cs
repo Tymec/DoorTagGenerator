@@ -20,7 +20,7 @@ public partial class DoorTag : ObservableObject {
 
     public static DoorTag Default() {
         return new DoorTag() {
-            Logo = { Data = Utils.LoadFromResource("Logo.png") },
+            Logo = { Data = Utils.LoadFromResource("Placeholder.png") },
             RoomNumber = { Text = "1083" },
             RoomMembers = { }
         };
