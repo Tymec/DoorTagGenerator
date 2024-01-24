@@ -4,24 +4,22 @@
     <OutputType Condition="'$(Configuration)' != 'Debug'">WinExe</OutputType>
     <OutputType Condition="'$(Configuration)' == 'Debug'">Exe</OutputType>
     <DebugType Condition="'$(Configuration)' != 'Debug'">embedded</DebugType>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
-    <!-- <PublishAot>true</PublishAot> -->
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-    <!-- <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile> -->
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
-  <!-- <PropertyGroup Condition="'$(OS)' == 'Windows_NT'"> -->
-  <PropertyGroup>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <DefineConstants>_WINDOWS</DefineConstants>
+    <DefineConstants>WINDOWS</DefineConstants>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
@@ -48,10 +46,6 @@
   <ItemGroup>
     <!-- <PackageReference Include="Neumorphism.Avalonia" Version="0.10.0" /> -->
     <ProjectReference Include="..\Neumorphism.Avalonia\Avalonia.Themes.Neumorphism\Avalonia.Themes.Neumorphism.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
-    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
   <ItemGroup>
