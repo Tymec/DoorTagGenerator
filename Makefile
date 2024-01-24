@@ -20,7 +20,11 @@ windows:
 	@mv build/win-x64/App.exe build/App.exe
 	@rm -rf build/win-x64
 
-publish: build linux windows
+package:
+	@tar -czvf build/linux-x64.tar.gz build/App
+	@zip -j build/win-x64.zip build/App.exe
+
+publish: build linux windows package
 
 demo:
 	@cd Neumorphism.Avalonia/Neumorphism.Avalonia.Demo && dotnet run
@@ -28,4 +32,4 @@ demo:
 dev:
 	@dotnet run --project App -r win-x64 -c Debug
 
-.PHONY: clean build linux windows publish demo dev
+.PHONY: clean build linux windows publish package demo dev
