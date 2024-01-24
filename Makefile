@@ -28,4 +28,4 @@ demo:
 dev:
 	@dotnet run --project App -r win-x64 -c Debug
 
-.PHONY: clean build linux windows publish dev
+.PHONY: clean build linux windows publish demo dev

@@ -7,6 +7,7 @@ using App.Helpers;
 using App.Models;
 using App.Services;
 using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using Avalonia.Styling;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -92,11 +93,9 @@ public partial class ControlsViewModel(DoorTag tag) : ViewModelBase {
 
             bool? result = PrinterHelper.Print(path);
             if (result == null) {
-                // ignore
+                return;
             } else if (result == false) {
                 throw new Exception("Printing failed.");
-            } else {
-                Messages?.Add("Printed successfully.");
             }
 #else
             var filesService = (
@@ -107,7 +106,7 @@ public partial class ControlsViewModel(DoorTag tag) : ViewModelBase {
                 title: "Save PDF File",
                 suggestedName: "document",
                 defaultExtension: ".pdf",
-            FilePickerFileTypes.Pdf
+                FilePickerFileTypes.Pdf
             );
             if (file is null) return;
 
@@ -115,7 +114,6 @@ public partial class ControlsViewModel(DoorTag tag) : ViewModelBase {
             var doc = Tag.ToDocument() ?? throw new Exception("Failed to build document.");
             doc.GeneratePdf(writeStream);
 #endif
-
             Messages?.Add("Printed successfully.");
         } catch (Exception e) {
             // IDEA: Show error dialog

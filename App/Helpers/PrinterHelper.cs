@@ -1,20 +1,19 @@
 using System;
 using System.IO;
+
+#if WINDOWS
 using System.Windows.Documents;
 using System.Windows.Controls;
 using System.Windows.Xps.Packaging;
 using System.Windows;
 using System.Printing;
-// TODO: Might have to conditionally import Windows-specific namespaces
+#endif
 
 namespace App.Helpers;
 
 public static class PrinterHelper {
     public static bool? Print(string xpsPath) {
-        if (!OperatingSystem.IsWindows()) {
-            throw new PlatformNotSupportedException("Printing is only supported on Windows.");
-        }
-
+#if WINDOWS
         // Landscape letter
         PrintTicket ticket = new() {
             PageOrientation = PageOrientation.Landscape,
@@ -46,5 +45,8 @@ public static class PrinterHelper {
             MessageBox.Show(e.Message);
             return false;
         }
+#else
+        throw new PlatformNotSupportedException("Printing is only supported on Windows.");
+#endif
     }
 }
