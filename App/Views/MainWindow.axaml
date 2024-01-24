@@ -10,7 +10,7 @@
         xmlns:dialog="using:DialogHostAvalonia"
         mc:Ignorable="d" d:DesignWidth="1611" d:DesignHeight="856"
         Width="1442" Height="767"
-        Title="App"
+        Title="App" Icon="avares://App/Assets/Icon.ico"
         x:Class="App.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel">
   <Design.DataContext>

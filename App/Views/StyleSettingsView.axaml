@@ -24,9 +24,10 @@
 
     <!-- Room members styling -->
     <TextBlock Text="Room Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
-    <Grid Grid.ColumnDefinitions="1*,Auto" Margin="0,0,0,15">
+    <Grid Grid.ColumnDefinitions="1*,2*" Margin="0,0,0,15">
       <TextBox Grid.Column="0" Theme="{StaticResource TextBoxHeader}" Margin="0,0,10,0" Watermark="Room members color" HorizontalAlignment="Stretch" Width="NaN" Text="{Binding Tag.RoomMembers.Color}" />
-      <NumericUpDown Grid.Column="1" Name="RoomMembersSizeInput" Minimum="1" Maximum="100" Increment="1" Value="{Binding Tag.RoomMembers.Size}" />
+      <!-- <NumericUpDown Grid.Column="1" Name="RoomMembersSizeInput" Minimum="1" Maximum="100" Increment="1" Value="{Binding Tag.RoomMembers.Size}" /> -->
+      <Slider Grid.Column="1" Theme="{StaticResource SliderHorizontalOutset}" Minimum="1" Maximum="100" HorizontalAlignment="Stretch" Width="NaN" Value="{Binding Tag.RoomMembers.Size}" ToolTip.Tip="{Binding $self.Value}" />
     </Grid>
   </StackPanel>
 </UserControl>
