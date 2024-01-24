@@ -22,20 +22,7 @@ public partial class DoorTag : ObservableObject {
         return new DoorTag() {
             Logo = { Data = Utils.LoadFromResource("Logo.png") },
             RoomNumber = { Text = "1083" },
-            RoomMembers = {
-                Members = [
-                    new() { Name = "John Doe" },
-                    new() { Name = "Marcus Aurelius" },
-                    new() { Name = "Veronica Mars" },
-                    new() { Name = "Thomas Anderson" },
-                    new() { Name = "Bruce Wayne" },
-                    new() { Name = "Tony Stark" },
-                    new() { Name = "Peter Parker" },
-                    new() { Name = "Clark Kent" },
-                    new() { Name = "Diana Prince" },
-                    new() { Name = "Natasha Romanoff" },
-                ]
-            }
+            RoomMembers = { }
         };
     }
 }
